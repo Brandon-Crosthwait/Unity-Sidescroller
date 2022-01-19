@@ -25955,6 +25955,7 @@ MonoBehaviour:
   health: {fileID: 0}
   jumpSound: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
   collectSound: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+  initialwallJumpVelocity: 23
 --- !u!50 &2009552057
 Rigidbody2D:
   serializedVersion: 4

@@ -37,11 +37,13 @@ public class PlayerMovement : MonoBehaviour
 
     // Wall Jump Variables
     private float wallJumpTime = 0.2f;
-    private float wallSlideSpeed = 0.3f;
+    private float wallSlideSpeed = -1.0f;
     private float wallDistance = 0.5f;
     bool isWallSliding = false;
     RaycastHit2D WallCheckHit;
     float jumpTime;
+    [SerializeField] private float initialwallJumpVelocity;
+    private float currentwallJumpVelocity;
 
     // Double Jump Variables
     private bool doubleJumpActive = false;
@@ -72,10 +74,19 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Speed", 0f);
 
         //if the player presses space and they are on the ground, the player jumps
-        if (Input.GetButtonDown("Jump") && isGrounded || doubleJumpActive && doubleJumpCount > 0 && Input.GetButtonDown("Jump")) {
-            // || isWallSliding && Input.GetButtonDown("Jump") <- parameters for wall jump
+        if (Input.GetButtonDown("Jump") && isGrounded || doubleJumpActive && doubleJumpCount > 0 && Input.GetButtonDown("Jump") || isWallSliding && Input.GetButtonDown("Jump")) {
             Jump();
 
+            //determines the push back when a player is trying to wall jump
+            if ((movementX < -0.01f) && (isWallSliding) && (Input.GetButtonDown("Jump"))) //facing left
+            {
+                currentwallJumpVelocity = initialwallJumpVelocity;
+            }
+            else if ((movementX > 0.01f) && (isWallSliding) && (Input.GetButtonDown("Jump"))) //facing right
+            {
+                currentwallJumpVelocity = -initialwallJumpVelocity;
+            }
+            
             //determines if the player has picked up a JumpPowerUpCollectable and allows the player to double jump
             if (doubleJumpActive && timesJumped > 0 && !isGrounded)
             {
@@ -93,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
         {
             movementSpeed = 8;
         }
+
     }
 
     // Updated on a fixed time.
@@ -107,7 +119,6 @@ public class PlayerMovement : MonoBehaviour
         isJumping = false;
 
         //Wall Jump
-        /*
         if (movementX > 0.01f)
         {
             WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, groundLayer);
@@ -131,7 +142,16 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, wallSlideSpeed, float.MaxValue));
         }
-        */
+
+        if (currentwallJumpVelocity > 0)
+        {
+            currentwallJumpVelocity--;
+        }
+        else if (currentwallJumpVelocity < 0)
+        {
+            currentwallJumpVelocity++;
+        }
+
     }
 
     // Jump() takes the player's x-axis velocity and applies the jump force
@@ -159,7 +179,7 @@ public class PlayerMovement : MonoBehaviour
     private void Move() {
         if (canMove)
         {
-            Vector2 movement = new Vector2(movementX * movementSpeed, rb.velocity.y);
+            Vector2 movement = new Vector2((movementX * movementSpeed) + currentwallJumpVelocity, rb.velocity.y);
             rb.velocity = movement;
         }
         else
