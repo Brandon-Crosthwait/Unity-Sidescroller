@@ -16,6 +16,10 @@ public class UIManager : MonoBehaviour
     private bool isDead = false;
     private bool gameOver = false;
 
+    //Pause Menu Object
+    public GameObject pauseMenuUI;
+    private static bool gameIsPaused = false;
+
     //Flickers the game over screen
     //**NOT CURRENTLY IN USE**
     /*private IEnumerator GameOverTextFlickerRoutine()
@@ -54,6 +58,13 @@ public class UIManager : MonoBehaviour
                 Timer.FlowingTime = 0;
                 SceneManager.LoadScene("MainMenu");
             }
+
+        //Press p to pause game
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            if(gameIsPaused) ResumeGame();
+            else PauseGame();
+        }
     }
 
     public void GameOver()
@@ -63,6 +74,19 @@ public class UIManager : MonoBehaviour
         gameOver = true;
     }
 
+    public void ResumeGame()
+    {
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1;
+        gameIsPaused = false;
+    }
+
+    public void PauseGame()
+    {
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0;
+        gameIsPaused = true;
+    }
 
     //private Timer _FlowingTime;
     public void PlayerWin()
