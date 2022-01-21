@@ -12,6 +12,7 @@ TagManager:
   - Trap
   - JumpPowerUpCollectable
   - Enemy
+  - PauseMenu
   layers:
   - Default
   - TransparentFX
