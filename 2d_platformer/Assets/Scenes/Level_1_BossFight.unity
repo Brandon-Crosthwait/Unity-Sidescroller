@@ -16072,7 +16072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff74000e1b6f4fc478bec2afd9782a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
+  speed: 3
   attackRange: 3
   hb: {fileID: 0}
   player: {fileID: 2009552060}
@@ -17984,6 +17984,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 560702614}
+  trigger: {fileID: 1882996138}
+  mainCam: {fileID: 944195332}
+  bossCam: {fileID: 2010003331}
+  firstTrigger: {fileID: 1989258433}
+  eb: {fileID: 0}
+  player: {fileID: 2009552053}
+  pm: {fileID: 0}
 --- !u!61 &1882996140
 BoxCollider2D:
   m_ObjectHideFlags: 0

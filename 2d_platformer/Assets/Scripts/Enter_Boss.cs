@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class Enter_Boss : MonoBehaviour
@@ -9,7 +10,8 @@ public class Enter_Boss : MonoBehaviour
     public GameObject boss;
     public GameObject trigger;
     public GameObject player;
-    
+    public Stopwatch time = new Stopwatch();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,8 +35,8 @@ public class Enter_Boss : MonoBehaviour
             bossCam.enabled = true;
             PlayerMovement pm = player.GetComponent<PlayerMovement>();
             pm.SetCanMove(false);
-            trigger.SetActive(false);
-
+            //trigger.SetActive(false);
+            time.Start();
         }
         
         
