@@ -13,7 +13,6 @@ TagManager:
   - JumpPowerUpCollectable
   - Enemy
   - PauseMenu
-  - NPC
   layers:
   - Default
   - TransparentFX
