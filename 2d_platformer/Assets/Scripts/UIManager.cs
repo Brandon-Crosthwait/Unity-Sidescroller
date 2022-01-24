@@ -12,8 +12,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text _gameOverText = null;
     //Used for the vignette
     [SerializeField] private Image _vig;
-    //Set the goal time for the level's bonus
-    [SerializeField] private float _gameTime;
     //Checks if character is dead
     private bool isDead = false;
     private bool gameOver = false;
@@ -90,18 +88,16 @@ public class UIManager : MonoBehaviour
         gameIsPaused = true;
     }
 
-    //Player reaches the end of the level and may get a bonus score
+    //private Timer _FlowingTime;
     public void PlayerWin()
     {
-        //Takes the score value of the player
         float endScore = ScoreScript.scoreValue;
-        float bonusScore = 0;
+        float bonusScore;
         if (Timer.FlowingTime > 30f) {
-            //No bonus score
+            bonusScore = 0;
         }
         else {
-            //bonus score compares the bonus score time minus the player's time plus 25%
-            bonusScore = ((_gameTime - Timer.FlowingTime) * 1.25f);
+            bonusScore = (Timer.FlowingTime * 1.1f);
         }
         endScore = endScore + bonusScore;
         _gameOverText.gameObject.SetActive(true);
