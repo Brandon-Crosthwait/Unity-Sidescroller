@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     // Bool for if the player is on the ground
     private bool isGrounded;
     private bool respawn;
-    private bool canMove;
+    public bool canMove;
 
     // Variable to update the score
     //public ScoreScript scoreValue; ??
@@ -242,6 +242,7 @@ public class PlayerMovement : MonoBehaviour
             doubleJumpActive = true;
             doubleJumpCount = 1;
         }
+       
     }
 
     private void Respawn() 
