@@ -73,7 +73,7 @@ public class UIManager : MonoBehaviour
 
     public void GameOver()
     {
-        instance.AddNewScore("frog", ScoreScript.scoreValue);
+        //instance.AddNewScore("frog", ScoreScript.scoreValue);
         _gameOverText.gameObject.SetActive(true);
         _vig.gameObject.SetActive(true);
         gameOver = true;
@@ -107,7 +107,7 @@ public class UIManager : MonoBehaviour
             bonusScore = ((_gameTime - Timer.FlowingTime) * 1.25f);
         }
         endScore = endScore + bonusScore;
-        instance.AddNewScore("frog", (int)endScore);
+        //instance.AddNewScore("frog", (int)endScore);
         
         _gameOverText.gameObject.SetActive(true);
         _gameOverText.text = "You Win!\n" + "Final Score: " + Mathf.Round(endScore) + "\n Press 'R' to return to menu";
