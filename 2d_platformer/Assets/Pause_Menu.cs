@@ -5,25 +5,37 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class MainMenu : MonoBehaviour
+public class Pause_Menu : MonoBehaviour
 {
     [SerializeField] private TMP_Text volumeTextValue = null;
     [SerializeField] private Slider volumeSlider = null;
+    public GameObject pauseMenuUI;
+    public GameObject pauseMenuSubMenu;
+    public GameObject settingsMenuSubMenu;
     //private float masterVolume = 0;
-    public void PlayGame()
+    public void ResumeGame()
     {
-        SceneManager.LoadScene(1); //Assuming Level 1 stays at build index 1
+        ResetPauseVariables();
     }
 
-    public void LoadGame()
+    public void MainMenu()
     {
-        Debug.Log("LOADED GAME");
+        ResetPauseVariables();
+        SceneManager.LoadScene(0); //this is assuming main menu stays at build index 0
     }
 
-    public void QuitGame()
+    public void Settings()
     {
-        Debug.Log("QUIT!");
-        Application.Quit();
+        pauseMenuSubMenu.SetActive(false);
+        settingsMenuSubMenu.SetActive(true);
+    }
+
+    public void ResetPauseVariables()
+    {
+        Time.timeScale = 1;
+        pauseMenuUI.SetActive(false);
+        PlayerMovement.isPaused = false;
+        UIManager.gameIsPaused = false;
     }
 
     public void SetVolume(float volume)

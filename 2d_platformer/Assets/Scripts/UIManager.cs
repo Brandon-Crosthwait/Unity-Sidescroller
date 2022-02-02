@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
 
     //Pause Menu Object
     public GameObject pauseMenuUI;
-    private static bool gameIsPaused = false;
+    public static bool gameIsPaused = false;
 
     private HighScores instance;
 
@@ -84,6 +84,7 @@ public class UIManager : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1;
         gameIsPaused = false;
+        PlayerMovement.isPaused = false;
     }
 
     public void PauseGame()
@@ -91,6 +92,7 @@ public class UIManager : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0;
         gameIsPaused = true;
+        PlayerMovement.isPaused = true;
     }
 
     //Player reaches the end of the level and may get a bonus score

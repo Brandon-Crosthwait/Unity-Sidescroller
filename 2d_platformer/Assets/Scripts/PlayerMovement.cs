@@ -23,8 +23,10 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumping;
     // Bool for if the player is on the ground
     private bool isGrounded;
-    private bool respawn;
     public bool canMove;
+    
+    //Bool for disallowing player movement buffering while paused
+    public static bool isPaused = false;
 
     // Variable to update the score
     //public ScoreScript scoreValue; ??
@@ -56,7 +58,6 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         health = FindObjectOfType<Health>();
-        respawn = true;
         canMove = true;
 
         Respawn();
@@ -156,15 +157,20 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Jump() takes the player's x-axis velocity and applies the jump force
-    void Jump() {
+    public void Jump() {
         if (canMove)
         {
-            SoundManager.instance.PlaySound(jumpSound);
-            Vector2 movement = new Vector2(rb.velocity.x, jumpForce);
-            rb.AddForce(new Vector2(0, jumpForce));
-            isJumping = true;
-            animator.SetBool("isJumping", isJumping);
-            timesJumped += 10;
+            if (isPaused != true)
+            {
+                SoundManager.instance.PlaySound(jumpSound);
+                Vector2 movement = new Vector2(rb.velocity.x, jumpForce);
+                rb.AddForce(new Vector2(0, jumpForce));
+                isJumping = true;
+                animator.SetBool("isJumping", isJumping);
+                timesJumped += 10;
+            }
+            else { }
+            
         }
     }
 
@@ -247,7 +253,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Respawn() 
     {
-        respawn = false;
+        
         transform.SetPositionAndRotation(startLocation.position + new Vector3(0.5175f, 0.5175f, 0f), transform.rotation);
         animator.SetBool("isDead", false);
         animator.SetTrigger("Appear");
