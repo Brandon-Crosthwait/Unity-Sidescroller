@@ -21,7 +21,7 @@ public class Pause_Menu : MonoBehaviour
     public void MainMenu()
     {
         ResetPauseVariables();
-        SceneManager.LoadScene(0); //this is assuming main menu stays at build index 0
+        SceneManager.LoadScene(Build.sceneOrder.MainMenu.ToString()); //this is assuming main menu stays at build index 0
     }
 
     public void Settings()
