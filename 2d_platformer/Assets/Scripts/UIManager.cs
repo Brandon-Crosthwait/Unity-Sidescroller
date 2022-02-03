@@ -60,7 +60,7 @@ public class UIManager : MonoBehaviour
             {
                 ScoreScript.scoreValue = 0;
                 Timer.FlowingTime = 0;
-                SceneManager.LoadScene("MainMenu");
+                SceneManager.LoadScene(Build.sceneOrder.LevelSelect.ToString());
             }
 
         //Press p to pause game
