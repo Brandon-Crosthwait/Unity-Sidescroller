@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     //private float masterVolume = 0;
     public void PlayGame()
     {
-        SceneManager.LoadScene(1); //Assuming Level 1 stays at build index 1
+        SceneManager.LoadScene(3); //Assuming Level Select stays at build index 3
     }
 
     public void LoadGame()
