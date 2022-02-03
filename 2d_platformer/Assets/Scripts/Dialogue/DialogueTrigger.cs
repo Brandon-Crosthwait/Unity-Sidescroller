@@ -6,7 +6,7 @@ public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
 
-    public void TriggerDialogue()
+    void OnTriggerEnter2D(Collider2D other)
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }

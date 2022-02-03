@@ -48,6 +48,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float initialwallJumpVelocity;
     private float currentwallJumpVelocity;
 
+    private float time;
+    private float timer;
+
     // Double Jump Variables
     private bool doubleJumpActive = false;
     private int doubleJumpCount;
@@ -59,6 +62,9 @@ public class PlayerMovement : MonoBehaviour
 
         health = FindObjectOfType<Health>();
         canMove = true;
+
+        time = 0.5f;
+        timer = Time.time;
 
         Respawn();
     }
@@ -76,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Speed", 0f);
 
         //if the player presses space and they are on the ground, the player jumps
+        /*
         if (Input.GetButtonDown("Jump") && isGrounded || doubleJumpActive && doubleJumpCount > 0 && Input.GetButtonDown("Jump") || isWallSliding && Input.GetButtonDown("Jump")) {
             Jump();
 
@@ -96,6 +103,44 @@ public class PlayerMovement : MonoBehaviour
                 doubleJumpActive = false;
             }
         }
+        */
+        
+
+        
+        timer += Time.deltaTime;
+        if (timer >= time)
+        {
+            if (Input.GetButtonDown("Jump") && isGrounded || doubleJumpActive && doubleJumpCount > 0 && Input.GetButtonDown("Jump") || isWallSliding && Input.GetButtonDown("Jump"))
+            {
+                Jump();
+                timer = 0;
+
+                if(doubleJumpActive)
+                {
+                    timer = 0.3f;
+                }
+                
+                //determines the push back when a player is trying to wall jump
+                if ((movementX < -0.01f) && (isWallSliding) && (Input.GetButtonDown("Jump"))) //facing left
+                {
+                    currentwallJumpVelocity = initialwallJumpVelocity;
+                }
+                else if ((movementX > 0.01f) && (isWallSliding) && (Input.GetButtonDown("Jump"))) //facing right
+                {
+                    currentwallJumpVelocity = -initialwallJumpVelocity;
+                }
+
+                //determines if the player has picked up a JumpPowerUpCollectable and allows the player to double jump
+                if (doubleJumpActive && timesJumped > 0 && !isGrounded)
+                {
+                    doubleJumpCount--;
+                    doubleJumpActive = false;
+                }
+                
+            }
+        }
+        
+
 
         // Updated the powerUpTime variable to count how long a player should have a powerup
         if (powerUpTime > 0)
