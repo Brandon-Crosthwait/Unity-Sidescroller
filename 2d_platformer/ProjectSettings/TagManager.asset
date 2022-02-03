@@ -13,6 +13,7 @@ TagManager:
   - JumpPowerUpCollectable
   - Enemy
   - PauseMenu
+  - Level Selection Box
   layers:
   - Default
   - TransparentFX
@@ -50,9 +51,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Foreground
+  - name: Background
     uniqueID: 3984941239
     locked: 0
-  - name: Background
+  - name: Midground
     uniqueID: 1223102561
+    locked: 0
+  - name: Foreground
+    uniqueID: 1206396957
     locked: 0
