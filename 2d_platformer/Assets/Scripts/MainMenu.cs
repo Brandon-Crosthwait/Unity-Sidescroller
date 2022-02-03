@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     //private float masterVolume = 0;
     public void PlayGame()
     {
+        PlayerPrefs.SetString("PreviousLevel", "");
         SceneManager.LoadScene(Build.sceneOrder.LevelSelect.ToString()); //Assuming Level Select stays at build index 3
     }
 

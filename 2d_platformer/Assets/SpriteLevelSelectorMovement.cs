@@ -14,6 +14,10 @@ public class SpriteLevelSelectorMovement : MonoBehaviour
     private bool isStartPosReached = false;
     private bool isMoving = false;
 
+    private float charMoveSpeed = 3f; //set sprite movespeed
+
+    string previousLevel;
+
     float step;
 
     public GameObject levelSelectStartPosition; //starting checkpoint
@@ -25,17 +29,39 @@ public class SpriteLevelSelectorMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
-        animator.SetFloat("Speed", 1f);
+        animator = GetComponent<Animator>(); //initialize animator
+        animator.SetFloat("Speed", charMoveSpeed); //set animator speed
+        //set all booleans to false
         isStartPosReached = false;
         isTriggered = false;
         isMoving = false;
+
+        previousLevel = PlayerPrefs.GetString("PreviousLevel");
+
+        foreach(GameObject GO in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
+        {
+            if(GO.tag == "Level Selection Box")
+            {
+                if(GO.name == previousLevel)
+                {
+                    Debug.Log("Success" + previousLevel + "is a match to" + GO.tag);
+                    spriteLevelSelector.transform.position = GO.transform.position;
+                    isStartPosReached = true;
+                }
+            }
+        }
+
         desiredPosition = new Vector3(0f, 0f, 0f);
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Return to Main Menu
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(Build.sceneOrder.MainMenu.ToString());
+        }
         step = animator.GetFloat("Speed") * Time.deltaTime;
         //Move Character to Starting Position
         if (isTriggered == false && isStartPosReached == false)
@@ -71,7 +97,7 @@ public class SpriteLevelSelectorMovement : MonoBehaviour
         {
             if(currentPosition.transform.Find("W") != null)
             {
-                animator.SetFloat("Speed", 1f);
+                animator.SetFloat("Speed", charMoveSpeed);
                 isTriggered = false;
                 isMoving = true;
                 desiredPosition = new Vector3(spriteLevelSelector.transform.position.x, spriteLevelSelector.transform.position.y + 100f, spriteLevelSelector.transform.position.z);
@@ -83,7 +109,7 @@ public class SpriteLevelSelectorMovement : MonoBehaviour
         {
             if (currentPosition.transform.Find("A") != null)
             {
-                animator.SetFloat("Speed", 1f);
+                animator.SetFloat("Speed", charMoveSpeed);
                 isTriggered = false;
                 isMoving = true;
                 desiredPosition = new Vector3(spriteLevelSelector.transform.position.x -100f, spriteLevelSelector.transform.position.y, spriteLevelSelector.transform.position.z);
@@ -94,7 +120,7 @@ public class SpriteLevelSelectorMovement : MonoBehaviour
         {
             if (currentPosition.transform.Find("S") != null)
             {
-                animator.SetFloat("Speed", 1f);
+                animator.SetFloat("Speed", charMoveSpeed);
                 isTriggered = false;
                 isMoving = true;
                 desiredPosition = new Vector3(spriteLevelSelector.transform.position.x, spriteLevelSelector.transform.position.y -100f, spriteLevelSelector.transform.position.z);
@@ -105,7 +131,7 @@ public class SpriteLevelSelectorMovement : MonoBehaviour
         {
             if (currentPosition.transform.Find("D") != null)
             {
-                animator.SetFloat("Speed", 1f);
+                animator.SetFloat("Speed", charMoveSpeed);
                 isTriggered = false;
                 isMoving = true;
                 desiredPosition = new Vector3(spriteLevelSelector.transform.position.x + 100f, spriteLevelSelector.transform.position.y, spriteLevelSelector.transform.position.z);
@@ -121,7 +147,6 @@ public class SpriteLevelSelectorMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("enter");
         animator.SetFloat("Speed", 0f);
         isTriggered = true;
         isMoving = false;
@@ -136,7 +161,6 @@ public class SpriteLevelSelectorMovement : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         isTriggered = false;
-        Debug.Log("exit");
         GameObject levelSelectPoint = collision.gameObject;
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -144,23 +168,4 @@ public class SpriteLevelSelectorMovement : MonoBehaviour
         }
     }
 
-    private void MoveUp(Vector3 current, Vector3 destination)
-    {
-        current = Vector3.MoveTowards(current, destination, step);
-    }
-
-    private void MoveDown()
-    {
-
-    }
-
-    private void MoveLeft()
-    {
-
-    }
-
-    private void MoveRight()
-    {
-
-    }
 }

@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 366698207}
   m_Layer: 0
   m_Name: Point 3 Collider
-  m_TagString: Level Selection Box
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -996,7 +996,7 @@ GameObject:
   - component: {fileID: 559008884}
   m_Layer: 0
   m_Name: Point 2 Collider
-  m_TagString: Level Selection Box
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1057,7 +1057,7 @@ GameObject:
   - component: {fileID: 571057983}
   m_Layer: 0
   m_Name: Point 4 Collider
-  m_TagString: Level Selection Box
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1148,7 +1148,7 @@ GameObject:
   - component: {fileID: 671696031}
   m_Layer: 0
   m_Name: 99
-  m_TagString: Untagged
+  m_TagString: Level Selection Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1744,7 +1744,7 @@ GameObject:
   - component: {fileID: 1890273704}
   m_Layer: 0
   m_Name: 1
-  m_TagString: Untagged
+  m_TagString: Level Selection Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1807,7 +1807,7 @@ GameObject:
   - component: {fileID: 2046351964}
   m_Layer: 0
   m_Name: Point 1 Collider
-  m_TagString: Level Selection Box
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

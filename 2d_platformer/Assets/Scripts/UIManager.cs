@@ -60,6 +60,9 @@ public class UIManager : MonoBehaviour
             {
                 ScoreScript.scoreValue = 0;
                 Timer.FlowingTime = 0;
+
+                //Get Current Scene Build Index and go back to Level Select
+                PlayerPrefs.SetString("PreviousLevel", SceneManager.GetActiveScene().buildIndex.ToString());
                 SceneManager.LoadScene(Build.sceneOrder.LevelSelect.ToString());
             }
 
