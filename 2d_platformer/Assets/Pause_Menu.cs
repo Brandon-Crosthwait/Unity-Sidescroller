@@ -7,29 +7,31 @@ using TMPro;
 
 public class Pause_Menu : MonoBehaviour
 {
-    [SerializeField] private TMP_Text volumeTextValue = null;
-    [SerializeField] private Slider volumeSlider = null;
+    //GameObjects
     public GameObject pauseMenuUI;
     public GameObject pauseMenuSubMenu;
     public GameObject settingsMenuSubMenu;
-    //private float masterVolume = 0;
+
     public void ResumeGame()
     {
         ResetPauseVariables();
     }
 
+    //Return to Main Menu
     public void MainMenu()
     {
         ResetPauseVariables();
         SceneManager.LoadScene(Build.sceneOrder.MainMenu.ToString());
     }
 
+    //Go To Settings Menu
     public void Settings()
     {
         pauseMenuSubMenu.SetActive(false);
         settingsMenuSubMenu.SetActive(true);
     }
 
+    //Helper Method to remove all pause/time restraints from game
     public void ResetPauseVariables()
     {
         Time.timeScale = 1;
@@ -38,21 +40,4 @@ public class Pause_Menu : MonoBehaviour
         UIManager.gameIsPaused = false;
     }
 
-    public void SetVolume(float volume)
-    {
-        AudioListener.volume = volume;
-        volumeTextValue.text = volume.ToString("0.0");
-    }
-
-    public void ApplyVolume()
-    {
-        PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
-    }
-
-    public void LoadVolume()
-    {
-        //masterVolume = PlayerPrefs.GetFloat("masterVolume");
-        volumeTextValue.text = PlayerPrefs.GetFloat("masterVolume").ToString("F1");
-        volumeSlider.value = PlayerPrefs.GetFloat("masterVolume");
-    }
 }

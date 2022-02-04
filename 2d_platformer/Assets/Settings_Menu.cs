@@ -8,14 +8,19 @@ using System;
 
 public class Settings_Menu : MonoBehaviour
 {
+    //Volume Controls
     [SerializeField] private TMP_Text volumeTextValue = null;
     [SerializeField] private Slider volumeSlider = null;
+
+    //Floats
     private float volume = 0;
+
+    //Gameobjects
     public GameObject pauseMenuSubMenu;
     public GameObject settingsMenuSubMenu;
     public GameObject volumeDisplayText;
-    //private float masterVolume = 0;
 
+    //Go To Main Menu
     public void ReturnToMainMenu()
     {
         pauseMenuSubMenu.SetActive(true);
@@ -24,9 +29,9 @@ public class Settings_Menu : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        this.volume = (float)Math.Round((double)volume,2);
+        this.volume = (float)Math.Round((double)volume,2); //Calculate Volume as %
         int volumePercentage = (int)(this.volume * 100);
-        volumeDisplayText.GetComponentInChildren<TextMeshProUGUI>().text = volumePercentage.ToString() + "%";
+        volumeDisplayText.GetComponentInChildren<TextMeshProUGUI>().text = volumePercentage.ToString() + "%"; //Display Volume as %
 
     }
 
