@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private float gravityScale = 5.0f;
     public Transform feet;
     public Transform startLocation;
+    public Transform checkPointLocation;
     public LayerMask groundLayer;
 
     //rb is the RigidBody2D assigned to the player
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     // Bool for if the player is on the ground
     private bool isGrounded;
     public bool canMove;
+    private bool endLevel = false;
     
     //Bool for disallowing player movement buffering while paused
     public static bool isPaused = false;
@@ -58,15 +60,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start() {
         animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
+            rb = GetComponent<Rigidbody2D>();
 
-        health = FindObjectOfType<Health>();
-        canMove = true;
+            health = FindObjectOfType<Health>();
+            canMove = true;
 
-        time = 0.5f;
-        timer = Time.time;
+            time = 0.5f;
+            timer = Time.time;
 
-        Respawn();
+            Respawn();
     }
 
     // Runs every frame
@@ -74,6 +76,21 @@ public class PlayerMovement : MonoBehaviour
     private void Update() {
         movementX = Input.GetAxisRaw("Horizontal");
         SetFacingDirection();
+
+        // Respawns player upon pressing r to the last checkpoint
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            //UIManager.RemoveText();
+            if (endLevel)
+            {
+                // Do Nothing
+            }
+            else
+            {
+                Respawn();
+            }
+        }
+
 
         // Set the speed variable in the animator to match the x input
         if (canMove)
@@ -275,7 +292,7 @@ public class PlayerMovement : MonoBehaviour
         {
             SoundManager.instance.PlaySound(collectSound);
             Destroy(other.gameObject);
-            health.IncreaseHealth();
+            health.IncreaseHealth(1);
         }
         //Players speed increases if a PowerUpCollectable is picked up
         if (other.gameObject.CompareTag("PowerUpCollectable"))
@@ -293,21 +310,35 @@ public class PlayerMovement : MonoBehaviour
             doubleJumpActive = true;
             doubleJumpCount = 1;
         }
-       
+        if (other.gameObject.CompareTag("Checkpoint"))
+        {
+            SoundManager.instance.PlaySound(collectSound);
+            startLocation.position = checkPointLocation.position;
+        }
+        if (other.gameObject.CompareTag("LevelEnd"))
+        {
+            endLevel = true;
+        }
     }
 
-    private void Respawn() 
+
+    public void Respawn() 
     {
-        
         transform.SetPositionAndRotation(startLocation.position + new Vector3(0.5175f, 0.5175f, 0f), transform.rotation);
         animator.SetBool("isDead", false);
         animator.SetTrigger("Appear");
+        SetCanMove(true);
         rb.gravityScale = gravityScale;
     }
 
     public void GetHit()
     {
         animator.SetTrigger("isHit");
+    }
+
+    public void EndLevel()
+    {
+        endLevel = true;
     }
 
     public void SetCanMove(bool canMove)

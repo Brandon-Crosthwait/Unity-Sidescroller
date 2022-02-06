@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     private bool isDead = false;
     private bool gameOver = false;
 
+
     //Pause Menu Object
     public GameObject pauseMenuUI;
     public static bool gameIsPaused = false;
@@ -56,7 +57,7 @@ public class UIManager : MonoBehaviour
         }*/
 
         //Press r to return to the main menu
-        if(Input.GetKeyDown(KeyCode.R) && (isDead || gameOver))
+        if(Input.GetKeyDown(KeyCode.M) && (gameOver))
             {
                 ScoreScript.scoreValue = 0;
                 Timer.FlowingTime = 0;
@@ -72,6 +73,20 @@ public class UIManager : MonoBehaviour
             if(gameIsPaused) ResumeGame();
             else PauseGame();
         }
+
+        if(Input.GetKeyDown(KeyCode.R) && (isDead))
+            {
+                lifeLeft.IncreaseHealth(3);
+                RemoveText();
+                isDead = false;
+            }
+    }
+
+    public void RemoveText()
+    {
+            _gameOverText.gameObject.SetActive(false);
+            isDead = false;
+            gameOver = false;
     }
 
     public void GameOver()
@@ -104,7 +119,7 @@ public class UIManager : MonoBehaviour
         //Takes the score value of the player
         float endScore = ScoreScript.scoreValue;
         float bonusScore = 0;
-        if (Timer.FlowingTime > 30f) {
+        if (Timer.FlowingTime > _gameTime) {
             //No bonus score
         }
         else {
@@ -115,8 +130,9 @@ public class UIManager : MonoBehaviour
         //instance.AddNewScore("frog", (int)endScore);
         
         _gameOverText.gameObject.SetActive(true);
-        _gameOverText.text = "You Win!\n" + "Final Score: " + Mathf.Round(endScore) + "\n Press 'R' to return to menu";
+        _gameOverText.text = "Bonus Score: " + Mathf.Round(bonusScore) + "\nTotal Score: " + Mathf.Round(endScore) + "\n Press 'M' to return to menu";
         _vig.gameObject.SetActive(true);
         gameOver = true;
+        gameIsPaused = true;
     }
 }

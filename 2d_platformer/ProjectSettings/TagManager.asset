@@ -15,6 +15,9 @@ TagManager:
   - PauseMenu
   - Level Selection Box
   - NPC_Bunny
+  - Checkpoint
+  - LevelStart
+  - LevelEnd
   layers:
   - Default
   - TransparentFX

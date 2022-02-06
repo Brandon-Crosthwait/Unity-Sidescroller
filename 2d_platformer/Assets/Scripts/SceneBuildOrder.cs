@@ -11,7 +11,8 @@ public class Build : MonoBehaviour
         MainMenu = 0,
         LevelSelect = 1,
         LevelOne = 2,
-        LevelOneBoss = 3
+        LevelOneBoss = 3,
+        LevelTwo = 4
     }
 
 }

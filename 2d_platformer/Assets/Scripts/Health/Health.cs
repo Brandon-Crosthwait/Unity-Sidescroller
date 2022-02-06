@@ -36,9 +36,9 @@ public class Health : MonoBehaviour
     }
 
     // Method used to increase the player's health when they pick up a HealthCollectable
-    public void IncreaseHealth()
+    public void IncreaseHealth(float healthToGive)
     {
-        currentHealth += 1;
+        currentHealth += healthToGive;
     }
 
     // Update is called once per frame
