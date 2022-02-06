@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using UnityEngine;
 
 public class Bossman_run : MonoBehaviour
 {
     public float speed = 2.5f;
-    public float attackRange = 3f;
+    public float attackRange = 7f;
     public GameObject hb;
     public Transform player;
     public Rigidbody2D rb;
@@ -21,7 +22,10 @@ public class Bossman_run : MonoBehaviour
     public bool canMove = true;
     public Camera mainCamera;
     public Camera bossCamera;
-    
+    public GameObject Left;
+    public GameObject Right;
+    public Stopwatch time = new Stopwatch();
+    public GameObject head;
 
     // Start is called before the first frame update
     void Start()
@@ -51,24 +55,71 @@ public class Bossman_run : MonoBehaviour
             if (dist <= 10f)    //boss will only chase if the player's distance is less than 10m
             {
 
-            if (canMove)
+            if (canMove && animator.GetBool("CanAttack") != true)
             {
                 Vector2 target = new Vector2(player.position.x, rb.position.y);  //get a vector from the boss to the player
                 Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
                 rb.MovePosition(newPos); //move the boss
                 animator.SetBool("Boss_speed", true);  //set the animation float value and pass in the player's speed
 
+                if (Vector2.Distance(player.position, rb.position) <= attackRange && player.position.y <= rb.position.y)
+                {
+                    if (animator.GetBool("CanAttack") == false)
+                    {
+                        animator.SetBool("CanAttack", true);
+                        time.Start();
+
+                    }
+                    
+                }
+                else
+                {
+
+                    animator.SetBool("CanAttack", false);
+
+                }
+
+
             }
             if (playerRB.gravityScale == 0)
             {
                 animator.SetBool("Boss_speed", false);  //set the animation float value and pass in the player's speed
                 canMove = false;
+                animator.SetBool("CanAttack", false);
+            }
+            }
+            else
+            {
+
+            animator.SetBool("CanAttack", false);
 
             }
-            }
-        else
+
+
+        if (time.IsRunning)
         {
+            if (time.ElapsedMilliseconds >= 200 && time.ElapsedMilliseconds <= 700)
+            {
+                if (player.position.x < rb.position.x)
+                {
+                    Left.SetActive(true);
+                    Right.SetActive(false);
+                }
+                if (player.position.x > rb.position.x)
+                {
+                    Left.SetActive(false);
+                    Right.SetActive(true);
+                }
+            }
 
+            if (time.ElapsedMilliseconds >= 1000)
+            {
+                animator.SetBool("CanAttack", false);
+                Left.SetActive(false);
+                Right.SetActive(false);
+                time.Stop();
+                time.Reset();
+            }
         }
 
             
@@ -82,12 +133,24 @@ public class Bossman_run : MonoBehaviour
 
         if (collision.tag == "Player") //check if the collision is the player
         {
-            //isHit = true;
-            Health health = collision.GetComponent<Health>();   //get the health script
-            health.TakeDamage(1f);                              //call the method
-            //pm.SetCanMove(false);
-            Vector2 bounce = new Vector2(20f, 0f);
-            //bossRB.AddForce(bounce);
+            if (playerRB.position.y + 0.5 >= rb.position.y)
+            {
+
+
+                Vector2 knockback = new Vector2(0f, 10f);
+                playerRB.AddForce(knockback);
+            }
+            else
+            {
+                //isHit = true;
+                Health health = collision.GetComponent<Health>();   //get the health script
+                health.TakeDamage(1f);                              //call the method
+                                                                    //pm.SetCanMove(false);
+                Vector2 bounce = new Vector2(20f, 0f);
+                //bossRB.AddForce(bounce);
+
+
+            }
 
 
 
