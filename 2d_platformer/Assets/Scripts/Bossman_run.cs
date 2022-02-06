@@ -26,6 +26,7 @@ public class Bossman_run : MonoBehaviour
     public GameObject Right;
     public Stopwatch time = new Stopwatch();
     public GameObject head;
+    public AudioSource attack;
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +69,7 @@ public class Bossman_run : MonoBehaviour
                     {
                         animator.SetBool("CanAttack", true);
                         time.Start();
+                        
 
                     }
                     
@@ -98,7 +100,7 @@ public class Bossman_run : MonoBehaviour
 
         if (time.IsRunning)
         {
-            if (time.ElapsedMilliseconds >= 200 && time.ElapsedMilliseconds <= 700)
+            if (time.ElapsedMilliseconds >= 400 && time.ElapsedMilliseconds <= 700)
             {
                 if (player.position.x < rb.position.x)
                 {
@@ -137,8 +139,8 @@ public class Bossman_run : MonoBehaviour
             {
 
 
-                Vector2 knockback = new Vector2(0f, 10f);
-                playerRB.AddForce(knockback);
+                //Vector2 knockback = new Vector2(0f, 10f);
+                //playerRB.AddForce(knockback);
             }
             else
             {
@@ -146,7 +148,7 @@ public class Bossman_run : MonoBehaviour
                 Health health = collision.GetComponent<Health>();   //get the health script
                 health.TakeDamage(1f);                              //call the method
                                                                     //pm.SetCanMove(false);
-                Vector2 bounce = new Vector2(20f, 0f);
+                //Vector2 bounce = new Vector2(20f, 0f);
                 //bossRB.AddForce(bounce);
 
 

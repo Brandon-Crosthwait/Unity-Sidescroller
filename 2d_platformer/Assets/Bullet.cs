@@ -16,42 +16,31 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //check if player is facing right
         if (player.localScale.x == 1)
         {
-            rb.velocity = transform.right * speed;
-            bulletSprite.flipX = false;
+            rb.velocity = transform.right * speed;  //launch the projectile right
+            bulletSprite.flipX = false;             //don't flip the bullet spawn point since the player is facing right
         }
-        if (player.localScale.x == -1)
+        if (player.localScale.x == -1)              //check if the player is facing left
         {
-            rb.velocity = transform.right * speed * -1;
-            bulletSprite.flipX = true;
+            rb.velocity = transform.right * speed * -1; //launch the projectile left by multiplying by -1
+            bulletSprite.flipX = true;                  //flip the spawn point since the player is facing left
         }
         //myTimer.Start();
     }
 
-    private void Update()
-    {
-        if (myTimer.IsRunning)
-        {
-            if (myTimer.ElapsedMilliseconds >= 3000)
-            {
-                myTimer.Stop();
-                myTimer.Reset();
-                Destroy(gameObject);
-            }
-        }
-    }
+  
 
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Ground")
+        if (collision.tag == "Ground")  //ground check for bullet
         {
             Destroy(gameObject);
         }
-        if (collision.tag == "Boss")
+        if (collision.tag == "Boss")   //boss check for bullet
         {
             status.DepleteHealth();
         }
