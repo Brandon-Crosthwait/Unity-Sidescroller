@@ -10,10 +10,13 @@ public class Bullet : MonoBehaviour
     public Transform player;
     public SpriteRenderer bulletSprite;
     public Stopwatch myTimer = new Stopwatch();
+    public Boss_Status status;
+    
 
     // Start is called before the first frame update
     void Start()
     {
+
         if (player.localScale.x == 1)
         {
             rb.velocity = transform.right * speed;
@@ -47,6 +50,10 @@ public class Bullet : MonoBehaviour
         if (collision.tag == "Ground")
         {
             Destroy(gameObject);
+        }
+        if (collision.tag == "Boss")
+        {
+            status.DepleteHealth();
         }
         
     }

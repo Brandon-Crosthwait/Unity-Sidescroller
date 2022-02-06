@@ -13,6 +13,7 @@ public class Boss_Entry : MonoBehaviour
     public Enter_Boss eb;
     public GameObject player;
     public PlayerMovement pm;
+    public AudioSource fallSound;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +40,7 @@ public class Boss_Entry : MonoBehaviour
     {
        if(collision.name == "Boss")
         {
+            fallSound.Play();
             animator.SetTrigger("Boss_Has_Fallen");
             //mainCam.enabled = true;
             //bossCam.enabled = false;

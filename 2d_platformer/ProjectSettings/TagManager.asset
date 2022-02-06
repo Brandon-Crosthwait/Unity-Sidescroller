@@ -12,6 +12,7 @@ TagManager:
   - Trap
   - JumpPowerUpCollectable
   - Enemy
+  - Boss
   layers:
   - Default
   - TransparentFX
