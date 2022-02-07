@@ -67,8 +67,8 @@ public class UIManager : MonoBehaviour
                 SceneManager.LoadScene(Build.sceneOrder.LevelSelect.ToString());
             }
 
-        //Press p to pause game
-        if(Input.GetKeyDown(KeyCode.P))
+        //Press p or escape to pause game
+        if(Input.GetKeyDown(KeyCode.P) || (Input.GetKeyDown(KeyCode.Escape)))
         {
             if(gameIsPaused) ResumeGame();
             else PauseGame();
