@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     public SpriteRenderer bulletSprite;
     public Stopwatch myTimer = new Stopwatch();
     public Boss_Status status;
+    public Transform boss;
     
 
     // Start is called before the first frame update
@@ -43,6 +44,12 @@ public class Bullet : MonoBehaviour
         if (collision.tag == "Boss")   //boss check for bullet
         {
             status.DepleteHealth();
+            float xScale = boss.localScale.x + 0.025f;
+            float yScale = boss.localScale.y + 0.025f;
+            float zScale = boss.localScale.z;
+            boss.localScale = new Vector3(xScale, yScale, zScale);
+            ScoreScript.scoreValue += 5;
+            Destroy(gameObject);
         }
         
     }

@@ -53,7 +53,7 @@ public class Bossman_run : MonoBehaviour
 
             float dist = Vector3.Distance(player.position, rb.position);  //get distance between boss and player
             
-            if (dist <= 10f)    //boss will only chase if the player's distance is less than 10m
+            if (dist <= 15f)    //boss will only chase if the player's distance is less than 15m
             {
 
             if (canMove && animator.GetBool("CanAttack") != true)

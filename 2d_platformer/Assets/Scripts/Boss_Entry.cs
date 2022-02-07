@@ -14,6 +14,7 @@ public class Boss_Entry : MonoBehaviour
     public GameObject player;
     public PlayerMovement pm;
     public AudioSource fallSound;
+    public Rigidbody2D Boss;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +43,7 @@ public class Boss_Entry : MonoBehaviour
         {
             fallSound.Play();
             animator.SetTrigger("Boss_Has_Fallen");
+            //Boss.isKinematic = true;
             //mainCam.enabled = true;
             //bossCam.enabled = false;
             
