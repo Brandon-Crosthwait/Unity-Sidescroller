@@ -39,6 +39,10 @@ public class Health : MonoBehaviour
     public void IncreaseHealth(float healthToGive)
     {
         currentHealth += healthToGive;
+        if(currentHealth > 3)
+        {
+            currentHealth = 3;
+        }
     }
 
     // Update is called once per frame
