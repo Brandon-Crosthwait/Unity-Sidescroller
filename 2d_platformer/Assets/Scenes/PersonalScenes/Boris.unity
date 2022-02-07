@@ -259,7 +259,7 @@ PrefabInstance:
     - target: {fileID: -8318536107238185804, guid: 9ca5819ca14a5a8458d9f175ca5e059f, type: 3}
       propertyPath: onContactTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 385447598}
+      objectReference: {fileID: 0}
     - target: {fileID: -8318536107238185804, guid: 9ca5819ca14a5a8458d9f175ca5e059f, type: 3}
       propertyPath: onContactTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -363,7 +363,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4164030196967850479, guid: 5c447c495cb78844cae49e884967818a, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4164030196967850479, guid: 5c447c495cb78844cae49e884967818a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -480,6 +480,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1469930690489043906, guid: b2ed4007ac571f749b907b562f604208, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 1543272784}
     - target: {fileID: 2330032127702085732, guid: b2ed4007ac571f749b907b562f604208, type: 3}
       propertyPath: m_Name
       value: HUD
@@ -576,19 +580,12 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 1543272784}
+    - target: {fileID: 5497283095319297286, guid: b2ed4007ac571f749b907b562f604208, type: 3}
+      propertyPath: lifeLeft
+      value: 
+      objectReference: {fileID: 1543272784}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2ed4007ac571f749b907b562f604208, type: 3}
---- !u!114 &385447598 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2330032127702085759, guid: b2ed4007ac571f749b907b562f604208, type: 3}
-  m_PrefabInstance: {fileID: 385447597}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5b18d7f726a94140b02ed3ceeb005d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &449860905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -720,7 +717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7819792326569794042, guid: 603e55d661f1aff49a9b17c0e9a99cc7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7819792326569794042, guid: 603e55d661f1aff49a9b17c0e9a99cc7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -782,7 +779,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7478209728883107511, guid: 2711d2c6e89bba140acdf1475a7462f3, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7478209728883107511, guid: 2711d2c6e89bba140acdf1475a7462f3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1455,7 +1452,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1199621684237731891, guid: 2d06bb8c875786748bbc69cf58294ddb, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1199621684237731891, guid: 2d06bb8c875786748bbc69cf58294ddb, type: 3}
       propertyPath: m_LocalPosition.x
