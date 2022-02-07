@@ -30,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
     //Bool for disallowing player movement buffering while paused
     public static bool isPaused = false;
 
+    //transform for the bullet spawn point
+    public Transform bulletSpawnPoint;
+
     // Variable to update the score
     //public ScoreScript scoreValue; ??
     // Object used to check and update the players health
@@ -271,9 +274,15 @@ public class PlayerMovement : MonoBehaviour
         if (canMove)
         {
             if (movementX > 0.01f)
+            {
                 transform.localScale = Vector3.one;
+  
+            }
             else if (movementX < -0.01f)
-                transform.localScale = new Vector3 (-1, 1, 1);
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+
+            }
         }
     }
 

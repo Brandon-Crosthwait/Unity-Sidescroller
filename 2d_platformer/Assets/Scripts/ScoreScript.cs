@@ -22,4 +22,6 @@ public class ScoreScript : MonoBehaviour
         /*if (Input.GetKeyDown(KeyCode.F))
             scoreValue += 10;*/
     }
+
+    
 }
