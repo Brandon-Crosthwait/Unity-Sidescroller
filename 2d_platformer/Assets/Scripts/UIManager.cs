@@ -68,7 +68,8 @@ public class UIManager : MonoBehaviour
             }
 
         //Press p or escape to pause game
-        if(Input.GetKeyDown(KeyCode.P) || (Input.GetKeyDown(KeyCode.Escape)))
+        if((Input.GetKeyDown(KeyCode.P) || (Input.GetKeyDown(KeyCode.Escape))) && isDead != true)
+
         {
             if(gameIsPaused) ResumeGame();
             else PauseGame();
@@ -78,15 +79,17 @@ public class UIManager : MonoBehaviour
             {
                 lifeLeft.IncreaseHealth(3);
                 RemoveText();
+                _vig.gameObject.SetActive(false);
                 isDead = false;
+                gameOver = false;
             }
     }
 
     public void RemoveText()
     {
-            _gameOverText.gameObject.SetActive(false);
             isDead = false;
             gameOver = false;
+            _gameOverText.gameObject.SetActive(false);
     }
 
     public void GameOver()

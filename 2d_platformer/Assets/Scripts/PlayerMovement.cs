@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class PlayerMovement : MonoBehaviour
     public Transform startLocation;
     public Transform checkPointLocation;
     public LayerMask groundLayer;
+    private bool rToRespawn = false;
+    private bool checkPointUnlocked = false;
+
+    //[SerializeField] private UnityEvent onContactTrigger;
 
     //rb is the RigidBody2D assigned to the player
     private Rigidbody2D rb;
@@ -80,8 +85,13 @@ public class PlayerMovement : MonoBehaviour
         movementX = Input.GetAxisRaw("Horizontal");
         SetFacingDirection();
 
+        if (health.currentHealth == 0)
+        {
+            rToRespawn = true;
+        }
+
         // Respawns player upon pressing r to the last checkpoint
-        if(Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKeyDown(KeyCode.R) && rToRespawn == true)
         {
             //UIManager.RemoveText();
             if (endLevel)
@@ -322,7 +332,8 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Checkpoint"))
         {
             SoundManager.instance.PlaySound(collectSound);
-            startLocation.position = checkPointLocation.position;
+            checkPointUnlocked = true;
+
         }
         if (other.gameObject.CompareTag("LevelEnd"))
         {
@@ -333,11 +344,21 @@ public class PlayerMovement : MonoBehaviour
 
     public void Respawn() 
     {
-        transform.SetPositionAndRotation(startLocation.position + new Vector3(0.5175f, 0.5175f, 0f), transform.rotation);
+        if (checkPointUnlocked == false)
+        {
+            transform.SetPositionAndRotation(startLocation.position + new Vector3(0.5175f, 0.5175f, 0f), transform.rotation);
+        }
+        else
+        {
+            transform.SetPositionAndRotation(checkPointLocation.position + new Vector3(0.5175f, 0.5175f, 0f), transform.rotation);
+        }
+
+
         animator.SetBool("isDead", false);
         animator.SetTrigger("Appear");
         SetCanMove(true);
         rb.gravityScale = gravityScale;
+        rToRespawn = false;
     }
 
     public void GetHit()
@@ -345,9 +366,9 @@ public class PlayerMovement : MonoBehaviour
         animator.SetTrigger("isHit");
     }
 
-    public void EndLevel()
+    public void SetCheckpointActive()
     {
-        endLevel = true;
+        checkPointUnlocked = true;
     }
 
     public void SetCanMove(bool canMove)
