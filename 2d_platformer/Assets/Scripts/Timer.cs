@@ -24,7 +24,7 @@ public class Timer : MonoBehaviour
     {
         if(TimerOn)
         {
-            FlowingTime += Time.deltaTime;
+            FlowingTime += (Time.deltaTime / 2);
             UpdateTimer(FlowingTime);
         }
     }

@@ -2037,6 +2037,10 @@ PrefabInstance:
       propertyPath: lifeLeft
       value: 
       objectReference: {fileID: 2009552054}
+    - target: {fileID: 5497283095319297286, guid: b2ed4007ac571f749b907b562f604208, type: 3}
+      propertyPath: _gameTime
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 7140413823441640913, guid: b2ed4007ac571f749b907b562f604208, type: 3}
       propertyPath: m_Name
       value: HUD
