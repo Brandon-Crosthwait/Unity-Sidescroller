@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
     private int timesJumped = 0;
 
     private void Start() {
-        animator = GetComponent<Animator>();
+            animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
 
             health = FindObjectOfType<Health>();
