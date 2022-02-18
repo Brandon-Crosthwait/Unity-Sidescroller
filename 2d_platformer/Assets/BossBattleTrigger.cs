@@ -36,7 +36,7 @@ public class BossBattleTrigger : MonoBehaviour
             rb.gravityScale = 1;   //set the boss' gravity so he falls
         }
 
-        if (myTimer.ElapsedMilliseconds >= 3000)
+        if (myTimer.ElapsedMilliseconds >= 3000)  //wait 3 seconds then trigger the next animation
         {
             animator.SetTrigger("IsActivated"); //trigger for his flying animation
             rb.gravityScale = 0;            //stop his fall part of the intro, first we stop gravity
@@ -44,6 +44,15 @@ public class BossBattleTrigger : MonoBehaviour
             rb.velocity = Vector3.zero;     // then set his velocity to 0
             
         }
+        if (myTimer.ElapsedMilliseconds >= 4500) //wait 4.5 seconds to switch cameras and enable flight for the boss
+        {
+            boss.enabled = false;
+            main.enabled = true;    //switch back to main camera
+
+            path.canMove = true;   //set canMove in AI Path script to true so he will move now
+
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -61,13 +70,5 @@ public class BossBattleTrigger : MonoBehaviour
             //Vector3 gravity = new Vector3(1, 1, 1);     //turn on the gravity in the AIPath script
             //path.gravity = gravity;     //set the new gravity
             
-    }
-
-    /// <summary>
-    /// enable the boss
-    /// </summary>
-    public void enableBoss()
-    {
-        
     }
 }
