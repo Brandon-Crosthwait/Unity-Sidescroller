@@ -8,11 +8,22 @@ public class BossBattleTrigger : MonoBehaviour
 {
     public Camera main;  //main player camera
     public Camera boss;  //camera for the boss
-    public AIPath path;
-    public Animator animator;
+    
+    
     public Stopwatch myTimer = new Stopwatch();
     public GameObject bossCam;
-    public Rigidbody2D rb; 
+    
+    public Rigidbody2D rb;
+    public Rigidbody2D rb1;   //each of the individual boss' rigidbodies
+    public Rigidbody2D rb2;
+
+    public AIPath path;  
+    public AIPath path1;  //each of the individual boss' AIPath script components
+    public AIPath path2;
+
+    public Animator animator;  //reference to the bat's animator component
+    public Animator animator1;
+    public Animator animator2;  
 
     public bool hasBeenEnabled = false;
 
@@ -34,15 +45,24 @@ public class BossBattleTrigger : MonoBehaviour
         if (myTimer.ElapsedMilliseconds >= 2000)   //wait 2.0 seconds for the initial part of the boss
         {
             rb.gravityScale = 1;   //set the boss' gravity so he falls
+            rb1.gravityScale = 1;   //set the boss' gravity so he falls
+            rb2.gravityScale = 1;   //set the boss' gravity so he falls
         }
 
         if (myTimer.ElapsedMilliseconds >= 3000)  //wait 3 seconds then trigger the next animation
         {
             animator.SetTrigger("IsActivated"); //trigger for his flying animation
+            animator1.SetTrigger("IsActivated"); //trigger for his flying animation
+            animator2.SetTrigger("IsActivated"); //trigger for his flying animation
+
             rb.gravityScale = 0;            //stop his fall part of the intro, first we stop gravity
-            
+            rb1.gravityScale = 0;            //stop his fall part of the intro, first we stop gravity
+            rb2.gravityScale = 0;            //stop his fall part of the intro, first we stop gravity
+
             rb.velocity = Vector3.zero;     // then set his velocity to 0
-            
+            rb1.velocity = Vector3.zero;     // then set his velocity to 0
+            rb2.velocity = Vector3.zero;     // then set his velocity to 0
+
         }
         if (myTimer.ElapsedMilliseconds >= 4500) //wait 4.5 seconds to switch cameras and enable flight for the boss
         {
@@ -50,7 +70,8 @@ public class BossBattleTrigger : MonoBehaviour
             main.enabled = true;    //switch back to main camera
 
             path.canMove = true;   //set canMove in AI Path script to true so he will move now
-
+            path1.canMove = true;
+            path2.canMove = true;
         }
 
     }
