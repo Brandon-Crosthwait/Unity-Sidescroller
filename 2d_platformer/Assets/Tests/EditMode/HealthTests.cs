@@ -26,7 +26,7 @@ public class HealthTests
     public void HealthEqualsMaxAtGameStart()
     {
         health = 1f;
-        hHelper.setStartingHealth(ref health, maxHealth);
+        hHelper.initializeStartingHealth(ref health, maxHealth);
         Assert.AreEqual(health, maxHealth);
     }
 
