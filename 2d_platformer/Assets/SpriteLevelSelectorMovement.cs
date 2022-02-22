@@ -42,6 +42,7 @@ public class SpriteLevelSelectorMovement : MonoBehaviour
         desiredPosition = new Vector3(0f, 0f, 0f);
 
         previousLevel = PlayerPrefs.GetString("PreviousLevel"); //Retrieved level last played or on
+        Debug.Log(PlayerPrefs.GetString("PreviousLevel"));
 
         //If a level has previously been played, find the correct trigger to start sprite on
         //i.e. if last level was level 1, start sprite on Gameobject that contains variable for level 1
