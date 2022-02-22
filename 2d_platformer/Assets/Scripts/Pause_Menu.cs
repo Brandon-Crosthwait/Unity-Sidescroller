@@ -7,6 +7,9 @@ using TMPro;
 
 public class Pause_Menu : MonoBehaviour
 {
+    //Unit Test Instance
+    private PauseMenuHelper PMH = new PauseMenuHelper();
+
     //GameObjects
     public GameObject pauseMenuUI;
     public GameObject pauseMenuSubMenu;
@@ -35,9 +38,19 @@ public class Pause_Menu : MonoBehaviour
     public void ResetPauseVariables()
     {
         Time.timeScale = 1;
+        //PMH.setTimeScale(1, Time.timeScale);
         pauseMenuUI.SetActive(false);
         PlayerMovement.isPaused = false;
         UIManager.gameIsPaused = false;
     }
 
+}
+
+public class PauseMenuHelper
+{
+
+    public void setTimeScale(float newTimeScale, float currentTimeScale)
+    {
+        currentTimeScale = newTimeScale;
+    }
 }
