@@ -18,6 +18,8 @@ TagManager:
   - Checkpoint
   - LevelStart
   - LevelEnd
+  - StompArea
+  - BounceArea
   layers:
   - Default
   - TransparentFX

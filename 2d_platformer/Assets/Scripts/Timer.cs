@@ -39,6 +39,6 @@ public class Timer : MonoBehaviour
 
         //{0} and {1} are used as the parameters inserted into Format() for minutes and seconds
         //and displayed in sets of two numbers
-        TimerTxt.text = string.Format("{0:00} : {1:00}", minutes, seconds);
+        TimerTxt.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }
