@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Text
       value: World 1 Boss Fight
       objectReference: {fileID: 0}
+    - target: {fileID: 6701252997957415407, guid: 0fef4e818d3ca7d45b74e424a17b700b, type: 3}
+      propertyPath: m_Name
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6701252998112843660, guid: 0fef4e818d3ca7d45b74e424a17b700b, type: 3}
       propertyPath: m_Name
       value: Level Select Wrapper
