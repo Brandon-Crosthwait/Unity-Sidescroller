@@ -14,7 +14,6 @@ public class Health : MonoBehaviour
     {
         //Sets the player health to the max health
         initializeStartingHealth();
-        Debug.Log ("setStartingHealth ran");
     }
 
     public float getStartingHealth() 
