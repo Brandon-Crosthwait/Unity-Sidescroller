@@ -9,10 +9,11 @@ public class Build : MonoBehaviour
     public enum sceneOrder
     { 
         MainMenu = 0,
-        LevelSelect = 4,
-        LevelOne = 1,
-        LevelOneBoss = 2,
-        LevelTwo = 3
+        Credentials = 1,
+        LevelSelect = 5,
+        LevelOne = 2,
+        LevelOneBoss = 3,
+        LevelTwo = 4
     }
 
 }

@@ -444,6 +444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeTextValue: {fileID: 0}
   volumeSlider: {fileID: 0}
+  iField: {fileID: 0}
 --- !u!224 &37631315
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1126,6 +1127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeTextValue: {fileID: 0}
   volumeSlider: {fileID: 0}
+  iField: {fileID: 0}
 --- !u!1 &208873029
 GameObject:
   m_ObjectHideFlags: 0
@@ -2578,6 +2580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeTextValue: {fileID: 0}
   volumeSlider: {fileID: 0}
+  iField: {fileID: 0}
 --- !u!4 &488800333
 Transform:
   m_ObjectHideFlags: 0
@@ -3204,8 +3207,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.4309, y: -33.3868}
-  m_SizeDelta: {x: 373.772, y: 166.7737}
+  m_AnchoredPosition: {x: 4.3, y: 32.7}
+  m_SizeDelta: {x: 373.772, y: 255.4794}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &666414477
 MonoBehaviour:
@@ -3232,7 +3235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25907797, g: 0.7735849, b: 0.2767029, a: 1}
+  m_Color: {r: 0.11372549, g: 0.44705883, b: 0.4627451, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3241,12 +3244,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -3800,6 +3803,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeTextValue: {fileID: 0}
   volumeSlider: {fileID: 0}
+  iField: {fileID: 0}
 --- !u!1 &825746157
 GameObject:
   m_ObjectHideFlags: 0
@@ -4597,6 +4601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeTextValue: {fileID: 0}
   volumeSlider: {fileID: 0}
+  iField: {fileID: 0}
 --- !u!224 &1074469072
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6061,6 +6066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeTextValue: {fileID: 0}
   volumeSlider: {fileID: 0}
+  iField: {fileID: 0}
 --- !u!1 &1373980430
 GameObject:
   m_ObjectHideFlags: 0
@@ -7297,6 +7303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeTextValue: {fileID: 0}
   volumeSlider: {fileID: 0}
+  iField: {fileID: 0}
 --- !u!1 &1600922732
 GameObject:
   m_ObjectHideFlags: 0
@@ -8884,6 +8891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeTextValue: {fileID: 0}
   volumeSlider: {fileID: 0}
+  iField: {fileID: 0}
 --- !u!1 &1911855998
 GameObject:
   m_ObjectHideFlags: 0
