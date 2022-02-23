@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    private HealthHelper hHelper;
+    private HealthHelper hHelper = new HealthHelper();
     //SerializedFiled allows to be seen in the editor
     [SerializeField] private float startingHealth;
     [SerializeField] private AudioClip hurtSound;
@@ -12,9 +12,24 @@ public class Health : MonoBehaviour
     public float currentHealth;
     private void Awake()
     {
-        hHelper = new HealthHelper();
         //Sets the player health to the max health
-        hHelper.setStartingHealth(ref currentHealth, startingHealth);
+        initializeStartingHealth();
+        Debug.Log ("setStartingHealth ran");
+    }
+
+    public float getStartingHealth() 
+    {
+        return startingHealth;
+    }
+
+    public void setStartingHealth(float health) 
+    {
+        startingHealth = health;
+    }
+
+    public void initializeStartingHealth() 
+    {
+       hHelper.initializeStartingHealth(ref currentHealth, startingHealth); 
     }
 
     public void TakeDamage(float _damage)
@@ -60,7 +75,7 @@ public class Health : MonoBehaviour
 
 public class HealthHelper
 {
-    public void setStartingHealth(ref float health, float startingHealth)
+    public void initializeStartingHealth(ref float health, float startingHealth)
     {
         health = startingHealth;
     }

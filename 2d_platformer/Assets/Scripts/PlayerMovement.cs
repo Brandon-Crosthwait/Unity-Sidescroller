@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
     private int timesJumped = 0;
 
     private void Start() {
-        animator = GetComponent<Animator>();
+            animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
 
             health = FindObjectOfType<Health>();
@@ -338,6 +338,15 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("LevelEnd"))
         {
             endLevel = true;
+        }
+        if (other.gameObject.CompareTag("StompArea"))
+        {
+            SoundManager.instance.PlaySound(jumpSound);
+            ScoreScript.scoreValue += 10;
+        }
+        if (other.gameObject.CompareTag("BounceArea"))
+        {
+            SoundManager.instance.PlaySound(jumpSound);
         }
     }
 

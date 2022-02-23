@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 20f;
+    public static float speed = 20f;
     public Rigidbody2D rb;
     public Transform player;
     public SpriteRenderer bulletSprite;
@@ -17,18 +18,30 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        BulletHelper bh = new BulletHelper();  //instantiate the helper class
+
+        bool isFacingRight = true;
+        float localScale = player.localScale.x;
+
+        bh.checkDirection(ref localScale, ref isFacingRight);
+        
+        
+
+        
+
         //check if player is facing right
-        if (player.localScale.x == 1)
+        if (isFacingRight)
         {
             rb.velocity = transform.right * speed;  //launch the projectile right
             bulletSprite.flipX = false;             //don't flip the bullet spawn point since the player is facing right
         }
-        if (player.localScale.x == -1)              //check if the player is facing left
+        if (!isFacingRight)              //check if the player is facing left
         {
             rb.velocity = transform.right * speed * -1; //launch the projectile left by multiplying by -1
             bulletSprite.flipX = true;                  //flip the spawn point since the player is facing left
         }
         //myTimer.Start();
+        
     }
 
   
@@ -55,5 +68,29 @@ public class Bullet : MonoBehaviour
     }
 
     // Update is called once per frame
+
+}
+
+/// <summary>
+/// helper class for the bullets, used for unit testing
+/// </summary>
+public class BulletHelper
+{
+
+    /// <summary>
+    /// checks the direction of the player for the bullet logic
+    /// </summary>
+   public void checkDirection(ref float localScale, ref bool isFacingRight)
+    {
+                                            //check if player is facing right
+        if (localScale == 1)
+        {
+            isFacingRight = true;
+        }
+        if (localScale == -1)              //check if the player is facing left
+        {
+            isFacingRight = false;
+        }
+    }
 
 }
