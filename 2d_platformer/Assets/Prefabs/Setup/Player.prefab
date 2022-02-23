@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1199621683989050895}
   - component: {fileID: 3284296101801129402}
+  - component: {fileID: 4261770943774810530}
   m_Layer: 0
   m_Name: feet
   m_TagString: StompArea
@@ -41,7 +42,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.125}
@@ -57,6 +58,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 0.25}
   m_EdgeRadius: 0
+--- !u!114 &4261770943774810530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199621683989051120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff100162dcc3e140bc664a6a2129e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageDealt: 1
+  enemyBounceForce: 25
+  objectBounceForce: 25
 --- !u!1 &1199621684237731898
 GameObject:
   m_ObjectHideFlags: 0
