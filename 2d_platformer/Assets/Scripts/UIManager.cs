@@ -94,7 +94,9 @@ public class UIManager : MonoBehaviour
 
     public void GameOver()
     {
-        //instance.AddNewScore("frog", ScoreScript.scoreValue);
+        name = PlayerPrefs.GetString("Name");
+        PlayerPrefs.SetString("highscore", name + ": " + ScoreScript.scoreValue);
+
         _gameOverText.gameObject.SetActive(true);
         _vig.gameObject.SetActive(true);
         gameOver = true;
@@ -131,7 +133,9 @@ public class UIManager : MonoBehaviour
         }
         endScore = endScore + bonusScore;
         //instance.AddNewScore("frog", (int)endScore);
-        
+        name = PlayerPrefs.GetString("Name");
+        PlayerPrefs.SetString("highscore", name + ": " + endScore);
+
         _gameOverText.gameObject.SetActive(true);
         _gameOverText.text = "Bonus Score: " + Mathf.Round(bonusScore) + "\nTotal Score: " + Mathf.Round(endScore) + "\n Press 'M' to return to menu";
         _vig.gameObject.SetActive(true);

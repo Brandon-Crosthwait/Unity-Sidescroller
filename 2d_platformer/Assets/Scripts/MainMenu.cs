@@ -9,9 +9,18 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private TMP_Text volumeTextValue = null;
     [SerializeField] private Slider volumeSlider = null;
+    public InputField iField;
+
     //private float masterVolume = 0;
     public void PlayGame()
     {
+        PlayerPrefs.SetString("PreviousLevel", "");
+        SceneManager.LoadScene(Build.sceneOrder.Credentials.ToString()); //Assuming Level Select stays at build index 3
+    }
+
+    public void SetName()
+    {
+        PlayerPrefs.SetString("Name", iField.text);
         PlayerPrefs.SetString("PreviousLevel", "");
         SceneManager.LoadScene(Build.sceneOrder.LevelSelect.ToString()); //Assuming Level Select stays at build index 3
     }
