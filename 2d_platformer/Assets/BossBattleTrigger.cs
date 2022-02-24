@@ -23,7 +23,7 @@ public class BossBattleTrigger : MonoBehaviour
 
     public Animator animator;  //reference to the bat's animator component
     public Animator animator1;
-    public Animator animator2;  
+    public Animator animator2;
 
     public bool hasBeenEnabled = false;
 
@@ -64,7 +64,7 @@ public class BossBattleTrigger : MonoBehaviour
             rb2.velocity = Vector3.zero;     // then set his velocity to 0
 
         }
-        if (myTimer.ElapsedMilliseconds >= 4500) //wait 4.5 seconds to switch cameras and enable flight for the boss
+        if (myTimer.ElapsedMilliseconds >= 5000) //wait 4.5 seconds to switch cameras and enable flight for the boss
         {
             boss.enabled = false;
             main.enabled = true;    //switch back to main camera
