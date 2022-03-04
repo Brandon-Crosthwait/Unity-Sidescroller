@@ -43,14 +43,17 @@ public class FlipScript : MonoBehaviour
         if (collision.tag == "Player") //&& health.currentHealth > 0)  
         {
             Health health = collision.GetComponent<Health>();   //get the health script
-            health.TakeDamage(1f);   //take one damage
 
             //bool stopAnimation = false;
 
-            if (health.currentHealth == 0)  //check if the player has died
+            if (health.currentHealth <= 0)  //check if the player has died
             {
                 aiPath.canMove = false;    //if player has died AI stops moving
                 //stopAnimation = true;
+            }
+            else
+            {
+                health.TakeDamage(1f);   //take one damage
             }
             /* if (health.currentHealth > -1)
             {
