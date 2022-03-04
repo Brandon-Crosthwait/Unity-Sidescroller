@@ -10,6 +10,8 @@ public class FlipScript : MonoBehaviour
 
     public Animator animator;
 
+    public Health playerHealth;
+
     
 
     // Start is called before the first frame update
@@ -38,23 +40,24 @@ public class FlipScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        if (collision.tag == "Player")  
+        if (collision.tag == "Player") //&& health.currentHealth > 0)  
         {
             Health health = collision.GetComponent<Health>();   //get the health script
             health.TakeDamage(1f);   //take one damage
 
-            bool stopAnimation = false;
+            //bool stopAnimation = false;
 
             if (health.currentHealth == 0)  //check if the player has died
             {
                 aiPath.canMove = false;    //if player has died AI stops moving
-                stopAnimation = true;
+                //stopAnimation = true;
             }
-
-            if (stopAnimation != true)
+            /* if (health.currentHealth > -1)
             {
-                animator.Play("Bat_attack", 0);
-            }
+                animator.Play("Bat_attack", 0, 0);
+            } */
+
+            
             
             
         }
