@@ -8,6 +8,10 @@ public class FlipScript : MonoBehaviour
     public AIPath aiPath;   //AIPath script reference
     public SpriteRenderer renderer;
 
+    public Animator animator;
+
+    
+
     // Start is called before the first frame update
     void Start()
     { 
@@ -28,6 +32,31 @@ public class FlipScript : MonoBehaviour
         {
             renderer.flipX = true;
             //transform.localScale = new Vector3(17f, 17f, 1f);  //change localScale to have him face Lect
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+        if (collision.tag == "Player")  
+        {
+            Health health = collision.GetComponent<Health>();   //get the health script
+            health.TakeDamage(1f);   //take one damage
+
+            bool stopAnimation = false;
+
+            if (health.currentHealth == 0)  //check if the player has died
+            {
+                aiPath.canMove = false;    //if player has died AI stops moving
+                stopAnimation = true;
+            }
+
+            if (stopAnimation != true)
+            {
+                animator.Play("Bat_attack", 0);
+            }
+            
+            
         }
     }
 }
