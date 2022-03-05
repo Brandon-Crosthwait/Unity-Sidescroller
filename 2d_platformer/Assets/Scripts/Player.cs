@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-public class Player()
+class Player
 {
     private static int id = 0;
     public string name;
@@ -21,5 +19,5 @@ public class Player()
         this.health = health;
         this.level = level;
         this.checkpoint = checkpoint;
-    }
+    } 
 }
