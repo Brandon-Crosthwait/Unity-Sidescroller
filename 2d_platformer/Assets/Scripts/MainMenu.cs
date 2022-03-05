@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
 
 public class MainMenu : MonoBehaviour
 {
@@ -20,9 +21,25 @@ public class MainMenu : MonoBehaviour
 
     public void SetName()
     {
+        Player newPlayer = new Player();
+        newPlayer.name = iField.text;
+        newPlayer.score = 0;
+        newPlayer.health = 3;
+        newPlayer.level = 1;
+        newPlayer.checkpoint = 0;
+
+        System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(Player));
+
+        var path = Application.dataPath + "//Scripts//Players//" + iField.text + ".xml";
+        System.IO.FileStream file = System.IO.File.Create(path);
+
+        writer.Serialize(file, newPlayer);
+        file.Close();
+
         PlayerPrefs.SetString("Name", iField.text);
+
         PlayerPrefs.SetString("PreviousLevel", "");
-        SceneManager.LoadScene(Build.sceneOrder.LevelSelect.ToString()); //Assuming Level Select stays at build index 3
+        SceneManager.LoadScene(Build.sceneOrder.LevelSelect.ToString());
     }
 
     public void LoadGame()
