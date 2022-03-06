@@ -53,7 +53,11 @@ public class FlipScript : MonoBehaviour
             }
             else
             {
-                health.TakeDamage(1f);   //take one damage
+                if (aiPath.canMove == true)
+                {
+                    health.TakeDamage(1f);   //take one damage
+                }
+                
             }
             /* if (health.currentHealth > -1)
             {
