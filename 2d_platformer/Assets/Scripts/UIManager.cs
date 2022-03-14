@@ -12,9 +12,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text _gameOverText = null;
     //Used for the vignette
     [SerializeField] private Image _vig;
+    //Set the goal time for the level's bonus
+    [SerializeField] private float _gameTime;
     //Checks if character is dead
     private bool isDead = false;
     private bool gameOver = false;
+
+
+    //Pause Menu Object
+    public GameObject pauseMenuUI;
+    public static bool gameIsPaused = false;
+
+    private HighScores instance;
 
     //Flickers the game over screen
     //**NOT CURRENTLY IN USE**
@@ -48,37 +57,89 @@ public class UIManager : MonoBehaviour
         }*/
 
         //Press r to return to the main menu
-        if(Input.GetKeyDown(KeyCode.R) && (isDead || gameOver))
+        if(Input.GetKeyDown(KeyCode.M) && (gameOver))
             {
                 ScoreScript.scoreValue = 0;
                 Timer.FlowingTime = 0;
-                SceneManager.LoadScene("MainMenu");
+
+                //Get Current Scene Build Index and go back to Level Select
+                PlayerPrefs.SetString("PreviousLevel", SceneManager.GetActiveScene().buildIndex.ToString());
+                SceneManager.LoadScene(Build.sceneOrder.LevelSelect.ToString());
             }
+
+        //Press p or escape to pause game
+        if((Input.GetKeyDown(KeyCode.P) || (Input.GetKeyDown(KeyCode.Escape))) && isDead != true)
+
+        {
+            if(gameIsPaused) ResumeGame();
+            else PauseGame();
+        }
+
+        if(Input.GetKeyDown(KeyCode.R) && (isDead))
+            {
+                lifeLeft.IncreaseHealth(3);
+                RemoveText();
+                _vig.gameObject.SetActive(false);
+                isDead = false;
+                gameOver = false;
+            }
+    }
+
+    public void RemoveText()
+    {
+            isDead = false;
+            gameOver = false;
+            _gameOverText.gameObject.SetActive(false);
     }
 
     public void GameOver()
     {
+        name = PlayerPrefs.GetString("Name");
+        PlayerPrefs.SetString("highscore", name + ": " + ScoreScript.scoreValue);
+
         _gameOverText.gameObject.SetActive(true);
         _vig.gameObject.SetActive(true);
         gameOver = true;
     }
 
+    public void ResumeGame()
+    {
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1;
+        gameIsPaused = false;
+        PlayerMovement.isPaused = false;
+    }
 
-    //private Timer _FlowingTime;
+    public void PauseGame()
+    {
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0;
+        gameIsPaused = true;
+        PlayerMovement.isPaused = true;
+    }
+
+    //Player reaches the end of the level and may get a bonus score
     public void PlayerWin()
     {
+        //Takes the score value of the player
         float endScore = ScoreScript.scoreValue;
-        float bonusScore;
-        if (Timer.FlowingTime > 30f) {
-            bonusScore = 0;
+        float bonusScore = 0;
+        if (Timer.FlowingTime > _gameTime) {
+            //No bonus score
         }
         else {
-            bonusScore = (Timer.FlowingTime * 1.1f);
+            //bonus score compares the bonus score time minus the player's time plus 25%
+            bonusScore = ((_gameTime - Timer.FlowingTime) * 1.25f);
         }
         endScore = endScore + bonusScore;
+        //instance.AddNewScore("frog", (int)endScore);
+        name = PlayerPrefs.GetString("Name");
+        PlayerPrefs.SetString("highscore", name + ": " + endScore);
+
         _gameOverText.gameObject.SetActive(true);
-        _gameOverText.text = "You Win!\n" + "Final Score: " + Mathf.Round(endScore) + "\n Press 'R' to return to menu";
+        _gameOverText.text = "Bonus Score: " + Mathf.Round(bonusScore) + "\nTotal Score: " + Mathf.Round(endScore) + "\n Press 'M' to return to menu";
         _vig.gameObject.SetActive(true);
         gameOver = true;
+        gameIsPaused = true;
     }
 }

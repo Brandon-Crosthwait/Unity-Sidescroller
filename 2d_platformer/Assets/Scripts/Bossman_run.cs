@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Bossman_run : MonoBehaviour
 {
@@ -37,17 +36,15 @@ public class Bossman_run : MonoBehaviour
         animator = rb.GetComponent<Animator>();
         pm = player.GetComponent<PlayerMovement>();
 
-        if (SceneManager.GetActiveScene().name == "BossFight 2")
-        {
-            animator.SetTrigger("Boss_Has_Fallen");   //code here for the boss character in the other bossfight levels
-        }
-
         //mainCamera.enabled = true;
         //bossCamera.enabled = false;
 
     }
 
-   
+    public void cameraTimer()
+    {
+        
+    }
 
     // Update is called once per frame
     void Update()

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,7 +12,12 @@ public class PlayerMovement : MonoBehaviour
     private float gravityScale = 5.0f;
     public Transform feet;
     public Transform startLocation;
+    public Transform checkPointLocation;
     public LayerMask groundLayer;
+    private bool rToRespawn = false;
+    private bool checkPointUnlocked = false;
+
+    //[SerializeField] private UnityEvent onContactTrigger;
 
     //rb is the RigidBody2D assigned to the player
     private Rigidbody2D rb;
@@ -22,8 +29,11 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumping;
     // Bool for if the player is on the ground
     private bool isGrounded;
-    private bool respawn;
     public bool canMove;
+    private bool endLevel = false;
+    
+    //Bool for disallowing player movement buffering while paused
+    public static bool isPaused = false;
 
     //transform for the bullet spawn point
     public Transform bulletSpawnPoint;
@@ -33,7 +43,9 @@ public class PlayerMovement : MonoBehaviour
     // Object used to check and update the players health
     public Health health;
     // Variable which will determine how long a power up lasts
-    private int powerUpTime;
+    private float powerUpTime;
+    private float powerUpTimer;
+    private bool powerUp = false;
 
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip collectSound;
@@ -48,20 +60,36 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float initialwallJumpVelocity;
     private float currentwallJumpVelocity;
 
+    private float time;
+    private float timer;
+
     // Double Jump Variables
     private bool doubleJumpActive = false;
     private int doubleJumpCount;
     private int timesJumped = 0;
 
+    // Turtle Enemy Variables
+    private float slowMovementTime;
+    private float slowMovementTimer;
+    bool slowMovement = false;
+
     private void Start() {
-        animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
+            animator = GetComponent<Animator>();
+            rb = GetComponent<Rigidbody2D>();
 
-        health = FindObjectOfType<Health>();
-        respawn = true;
-        canMove = true;
+            health = FindObjectOfType<Health>();
+            canMove = true;
 
-        Respawn();
+            time = 0.5f;
+            timer = Time.time;
+
+            powerUpTime = 0.0f;
+            powerUpTimer = Time.time;
+
+            slowMovementTime = 0.0f;
+            slowMovementTimer = Time.time;
+
+            Respawn();
     }
 
     // Runs every frame
@@ -70,6 +98,26 @@ public class PlayerMovement : MonoBehaviour
         movementX = Input.GetAxisRaw("Horizontal");
         SetFacingDirection();
 
+        if (health.currentHealth == 0)
+        {
+            rToRespawn = true;
+        }
+
+        // Respawns player upon pressing r to the last checkpoint
+        if(Input.GetKeyDown(KeyCode.R) && rToRespawn == true)
+        {
+            //UIManager.RemoveText();
+            if (endLevel)
+            {
+                // Do Nothing
+            }
+            else
+            {
+                Respawn();
+            }
+        }
+
+
         // Set the speed variable in the animator to match the x input
         if (canMove)
             animator.SetFloat("Speed", Mathf.Abs(movementX));
@@ -77,6 +125,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Speed", 0f);
 
         //if the player presses space and they are on the ground, the player jumps
+        /*
         if (Input.GetButtonDown("Jump") && isGrounded || doubleJumpActive && doubleJumpCount > 0 && Input.GetButtonDown("Jump") || isWallSliding && Input.GetButtonDown("Jump")) {
             Jump();
 
@@ -97,17 +146,65 @@ public class PlayerMovement : MonoBehaviour
                 doubleJumpActive = false;
             }
         }
-
-        // Updated the powerUpTime variable to count how long a player should have a powerup
-        if (powerUpTime > 0)
-        { 
-            powerUpTime--;
-        }
-        if (powerUpTime == 0)
+        */
+        
+        //Timer Countdown for Speed Power Up.
+        if (powerUp)
         {
+            powerUpTimer += Time.deltaTime;
+        }
+        if (powerUpTimer > powerUpTime)
+        {
+            powerUpTimer = 0;
+            powerUp = false;
+            movementSpeed = 8;
+        }
+        
+        //Timer Countdown for Turtle Enemy.
+        if (slowMovement)
+        {
+            slowMovementTimer += Time.deltaTime;
+        }
+        if (slowMovementTimer > slowMovementTime)
+        {
+            slowMovementTimer = 0;
+            slowMovement = false;
             movementSpeed = 8;
         }
 
+        timer += Time.deltaTime;
+        if (timer >= time)
+        {
+            if (Input.GetButtonDown("Jump") && isGrounded || doubleJumpActive && doubleJumpCount > 0 && Input.GetButtonDown("Jump") || isWallSliding && Input.GetButtonDown("Jump"))
+            {
+                Jump();
+                timer = 0;
+
+                if(doubleJumpActive)
+                {
+                    timer = 0.3f;
+                }
+                
+                //determines the push back when a player is trying to wall jump
+                if ((movementX < -0.01f) && (isWallSliding) && (Input.GetButtonDown("Jump"))) //facing left
+                {
+                    currentwallJumpVelocity = initialwallJumpVelocity;
+                }
+                else if ((movementX > 0.01f) && (isWallSliding) && (Input.GetButtonDown("Jump"))) //facing right
+                {
+                    currentwallJumpVelocity = -initialwallJumpVelocity;
+                }
+
+                //determines if the player has picked up a JumpPowerUpCollectable and allows the player to double jump
+                if (doubleJumpActive && timesJumped > 0 && !isGrounded)
+                {
+                    doubleJumpCount--;
+                    doubleJumpActive = false;
+                }
+                
+            }
+        }
+        
     }
 
     // Updated on a fixed time.
@@ -158,15 +255,20 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Jump() takes the player's x-axis velocity and applies the jump force
-    void Jump() {
+    public void Jump() {
         if (canMove)
         {
-            SoundManager.instance.PlaySound(jumpSound);
-            Vector2 movement = new Vector2(rb.velocity.x, jumpForce);
-            rb.AddForce(new Vector2(0, jumpForce));
-            isJumping = true;
-            animator.SetBool("isJumping", isJumping);
-            timesJumped += 10;
+            if (isPaused != true)
+            {
+                SoundManager.instance.PlaySound(jumpSound);
+                Vector2 movement = new Vector2(rb.velocity.x, jumpForce);
+                rb.AddForce(new Vector2(0, jumpForce));
+                isJumping = true;
+                animator.SetBool("isJumping", isJumping);
+                timesJumped += 10;
+            }
+            else { }
+            
         }
     }
 
@@ -232,15 +334,19 @@ public class PlayerMovement : MonoBehaviour
         {
             SoundManager.instance.PlaySound(collectSound);
             Destroy(other.gameObject);
-            health.IncreaseHealth();
+            health.IncreaseHealth(1);
         }
         //Players speed increases if a PowerUpCollectable is picked up
         if (other.gameObject.CompareTag("PowerUpCollectable"))
         {
-            SoundManager.instance.PlaySound(collectSound);
-            Destroy(other.gameObject);
-            movementSpeed = 20;
-            powerUpTime = 3000;
+            if (!powerUp)
+            {
+                SoundManager.instance.PlaySound(collectSound);
+                Destroy(other.gameObject);
+                movementSpeed = 13;
+                powerUp = true;
+                powerUpTime = 5.0f;
+            }
         }
         //Player is able to double jump if JumpPowerUpCollectable is picked up
         if (other.gameObject.CompareTag("JumpPowerUpCollectable"))
@@ -250,21 +356,66 @@ public class PlayerMovement : MonoBehaviour
             doubleJumpActive = true;
             doubleJumpCount = 1;
         }
-       
+        //Player runs into Turtle Enemy and is slowed down for a duration of time
+        if (other.gameObject.CompareTag("TurtleEnemy"))
+        {
+            if (!slowMovement)
+            {
+                GetHit();
+                movementSpeed = 4;
+                slowMovement = true;
+                slowMovementTime = 5.0f;
+            }
+        }
+        if (other.gameObject.CompareTag("Checkpoint"))
+        {
+            SoundManager.instance.PlaySound(collectSound);
+            checkPointUnlocked = true;
+
+        }
+        if (other.gameObject.CompareTag("LevelEnd"))
+        {
+            endLevel = true;
+        }
+        if (other.gameObject.CompareTag("StompArea"))
+        {
+            SoundManager.instance.PlaySound(jumpSound);
+            ScoreScript.scoreValue += 10;
+        }
+        if (other.gameObject.CompareTag("BounceArea"))
+        {
+            SoundManager.instance.PlaySound(jumpSound);
+        }
     }
 
-    private void Respawn() 
+
+    public void Respawn() 
     {
-        respawn = false;
-        transform.SetPositionAndRotation(startLocation.position + new Vector3(0.5175f, 0.5175f, 0f), transform.rotation);
+        if (checkPointUnlocked == false)
+        {
+            transform.SetPositionAndRotation(startLocation.position + new Vector3(0.5175f, 0.5175f, 0f), transform.rotation);
+        }
+        else
+        {
+            transform.SetPositionAndRotation(checkPointLocation.position + new Vector3(0.5175f, 0.5175f, 0f), transform.rotation);
+        }
+
+
         animator.SetBool("isDead", false);
         animator.SetTrigger("Appear");
+        SetCanMove(true);
         rb.gravityScale = gravityScale;
+        rToRespawn = false;
     }
 
     public void GetHit()
     {
         animator.SetTrigger("isHit");
+    }
+
+    public void SetCheckpointActive()
+    {
+        checkPointUnlocked = true;
     }
 
     public void SetCanMove(bool canMove)

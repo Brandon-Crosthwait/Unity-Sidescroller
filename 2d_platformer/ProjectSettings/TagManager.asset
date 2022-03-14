@@ -12,7 +12,16 @@ TagManager:
   - Trap
   - JumpPowerUpCollectable
   - Enemy
-  - Boss
+  - PauseMenu
+  - Level Selection Box
+  - NPC_Bunny
+  - Checkpoint
+  - LevelStart
+  - LevelEnd
+  - StompArea
+  - BounceArea
+  - TurtleEnemy
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -50,9 +59,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Foreground
+  - name: Background
     uniqueID: 3984941239
     locked: 0
-  - name: Background
+  - name: Midground
     uniqueID: 1223102561
+    locked: 0
+  - name: Foreground
+    uniqueID: 1206396957
     locked: 0

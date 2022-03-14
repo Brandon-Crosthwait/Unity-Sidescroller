@@ -8,7 +8,7 @@ public class ScoreScript : MonoBehaviour
     public static int scoreValue = 0;
     Text score;
 
-
+    
     // Start is called before the first frame update
     void Start()
     {

@@ -13,7 +13,6 @@ public class EnvironmentDamage : MonoBehaviour
         {
             collision.GetComponent<Health>().TakeDamage(damage);
             collision.GetComponent<PlayerMovement>().GetHit();
-            ScoreScript.scoreValue -= 5;
         }
     }
 }
