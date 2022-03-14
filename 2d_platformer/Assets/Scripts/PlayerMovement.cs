@@ -43,7 +43,9 @@ public class PlayerMovement : MonoBehaviour
     // Object used to check and update the players health
     public Health health;
     // Variable which will determine how long a power up lasts
-    private int powerUpTime;
+    private float powerUpTime;
+    private float powerUpTimer;
+    private bool powerUp = false;
 
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip collectSound;
@@ -66,6 +68,11 @@ public class PlayerMovement : MonoBehaviour
     private int doubleJumpCount;
     private int timesJumped = 0;
 
+    // Turtle Enemy Variables
+    private float slowMovementTime;
+    private float slowMovementTimer;
+    bool slowMovement = false;
+
     private void Start() {
             animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
@@ -75,6 +82,12 @@ public class PlayerMovement : MonoBehaviour
 
             time = 0.5f;
             timer = Time.time;
+
+            powerUpTime = 0.0f;
+            powerUpTimer = Time.time;
+
+            slowMovementTime = 0.0f;
+            slowMovementTimer = Time.time;
 
             Respawn();
     }
@@ -135,8 +148,30 @@ public class PlayerMovement : MonoBehaviour
         }
         */
         
-
+        //Timer Countdown for Speed Power Up.
+        if (powerUp)
+        {
+            powerUpTimer += Time.deltaTime;
+        }
+        if (powerUpTimer > powerUpTime)
+        {
+            powerUpTimer = 0;
+            powerUp = false;
+            movementSpeed = 8;
+        }
         
+        //Timer Countdown for Turtle Enemy.
+        if (slowMovement)
+        {
+            slowMovementTimer += Time.deltaTime;
+        }
+        if (slowMovementTimer > slowMovementTime)
+        {
+            slowMovementTimer = 0;
+            slowMovement = false;
+            movementSpeed = 8;
+        }
+
         timer += Time.deltaTime;
         if (timer >= time)
         {
@@ -170,18 +205,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         
-
-
-        // Updated the powerUpTime variable to count how long a player should have a powerup
-        if (powerUpTime > 0)
-        { 
-            powerUpTime--;
-        }
-        if (powerUpTime == 0)
-        {
-            movementSpeed = 8;
-        }
-
     }
 
     // Updated on a fixed time.
@@ -316,10 +339,14 @@ public class PlayerMovement : MonoBehaviour
         //Players speed increases if a PowerUpCollectable is picked up
         if (other.gameObject.CompareTag("PowerUpCollectable"))
         {
-            SoundManager.instance.PlaySound(collectSound);
-            Destroy(other.gameObject);
-            movementSpeed = 20;
-            powerUpTime = 3000;
+            if (!powerUp)
+            {
+                SoundManager.instance.PlaySound(collectSound);
+                Destroy(other.gameObject);
+                movementSpeed = 13;
+                powerUp = true;
+                powerUpTime = 5.0f;
+            }
         }
         //Player is able to double jump if JumpPowerUpCollectable is picked up
         if (other.gameObject.CompareTag("JumpPowerUpCollectable"))
@@ -328,6 +355,17 @@ public class PlayerMovement : MonoBehaviour
             Destroy(other.gameObject);
             doubleJumpActive = true;
             doubleJumpCount = 1;
+        }
+        //Player runs into Turtle Enemy and is slowed down for a duration of time
+        if (other.gameObject.CompareTag("TurtleEnemy"))
+        {
+            if (!slowMovement)
+            {
+                GetHit();
+                movementSpeed = 4;
+                slowMovement = true;
+                slowMovementTime = 5.0f;
+            }
         }
         if (other.gameObject.CompareTag("Checkpoint"))
         {
