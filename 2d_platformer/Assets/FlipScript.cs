@@ -19,6 +19,7 @@ public class FlipScript : MonoBehaviour
     { 
         renderer = transform.GetComponent<SpriteRenderer>();
         renderer.flipX = false;
+        
     }
 
     // Update is called once per frame
