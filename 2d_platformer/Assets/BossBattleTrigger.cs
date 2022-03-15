@@ -72,6 +72,7 @@ public class BossBattleTrigger : MonoBehaviour
             path.canMove = true;   //set canMove in AI Path script to true so he will move now
             path1.canMove = true;
             path2.canMove = true;
+            myTimer.Stop();
         }
 
     }
