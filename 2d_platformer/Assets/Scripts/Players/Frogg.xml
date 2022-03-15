@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<Player xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <name>Frogg</name>
+  <score>0</score>
+  <health>3</health>
+  <level>1</level>
+  <timer>0</timer>
+  <checkpoint>false</checkpoint>
+</Player>

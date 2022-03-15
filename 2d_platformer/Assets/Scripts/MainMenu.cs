@@ -26,7 +26,7 @@ public class MainMenu : MonoBehaviour
         newPlayer.score = 0;
         newPlayer.health = 3;
         newPlayer.level = 1;
-        newPlayer.checkpoint = 0;
+        newPlayer.checkpoint = false;
 
         System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(Player));
 

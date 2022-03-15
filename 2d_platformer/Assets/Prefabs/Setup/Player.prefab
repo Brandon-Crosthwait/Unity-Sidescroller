@@ -250,6 +250,8 @@ MonoBehaviour:
   startingHealth: 3
   hurtSound: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
   deathSound: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
+  iFramesDuration: 0
+  numFlashes: 0
   currentHealth: 0
 --- !u!95 &1199621684237731896
 Animator:
