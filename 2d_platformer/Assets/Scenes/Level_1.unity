@@ -443,6 +443,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1199621683989051120, guid: 2d06bb8c875786748bbc69cf58294ddb, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1199621683989051120, guid: 2d06bb8c875786748bbc69cf58294ddb, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -498,9 +502,21 @@ PrefabInstance:
       propertyPath: startLocation
       value: 
       objectReference: {fileID: 542480003}
+    - target: {fileID: 1199621684237731897, guid: 2d06bb8c875786748bbc69cf58294ddb, type: 3}
+      propertyPath: numFlashes
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1199621684237731897, guid: 2d06bb8c875786748bbc69cf58294ddb, type: 3}
+      propertyPath: iFramesDuration
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1199621684237731898, guid: 2d06bb8c875786748bbc69cf58294ddb, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1199621684237731898, guid: 2d06bb8c875786748bbc69cf58294ddb, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3284296101801129402, guid: 2d06bb8c875786748bbc69cf58294ddb, type: 3}
       propertyPath: m_Enabled
@@ -1490,13 +1506,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1893210413}
     m_Modifications:
+    - target: {fileID: 3010006576632421667, guid: 6a6291b1d863d9a4f9ba634495dcd1c4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3010006576632421672, guid: 6a6291b1d863d9a4f9ba634495dcd1c4, type: 3}
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 2009552054}
+    - target: {fileID: 3010006576960286091, guid: 6a6291b1d863d9a4f9ba634495dcd1c4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010006577763523576, guid: 6a6291b1d863d9a4f9ba634495dcd1c4, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3010006578117859781, guid: 6a6291b1d863d9a4f9ba634495dcd1c4, type: 3}
       propertyPath: m_Name
       value: Ghost Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010006578117859781, guid: 6a6291b1d863d9a4f9ba634495dcd1c4, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3010006578117859783, guid: 6a6291b1d863d9a4f9ba634495dcd1c4, type: 3}
       propertyPath: m_RootOrder
@@ -1656,6 +1688,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemies
       objectReference: {fileID: 0}
+    - target: {fileID: 7903429335414644144, guid: 2711d2c6e89bba140acdf1475a7462f3, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2711d2c6e89bba140acdf1475a7462f3, type: 3}
 --- !u!1001 &4385612796654143616
@@ -1665,9 +1701,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1019705619}
     m_Modifications:
+    - target: {fileID: 4385612795730420833, guid: f6429c3310d406a42a7d7c798298e368, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4385612796749111004, guid: f6429c3310d406a42a7d7c798298e368, type: 3}
       propertyPath: m_Name
       value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385612796749111004, guid: f6429c3310d406a42a7d7c798298e368, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4385612796749111006, guid: f6429c3310d406a42a7d7c798298e368, type: 3}
       propertyPath: playerHealth
@@ -1716,6 +1760,10 @@ PrefabInstance:
     - target: {fileID: 4385612796749111007, guid: f6429c3310d406a42a7d7c798298e368, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385612797522682605, guid: f6429c3310d406a42a7d7c798298e368, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6429c3310d406a42a7d7c798298e368, type: 3}

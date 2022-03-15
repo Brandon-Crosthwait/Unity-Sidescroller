@@ -100,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (health.currentHealth == 0)
         {
+            Physics2D.IgnoreLayerCollision(7,8, true);
             rToRespawn = true;
         }
 
@@ -367,21 +368,25 @@ public class PlayerMovement : MonoBehaviour
                 slowMovementTime = 5.0f;
             }
         }
+        //Unlocks Checkpoint
         if (other.gameObject.CompareTag("Checkpoint"))
         {
             SoundManager.instance.PlaySound(collectSound);
             checkPointUnlocked = true;
 
         }
+        //Might not need to be used
         if (other.gameObject.CompareTag("LevelEnd"))
         {
             endLevel = true;
         }
+        //Player stomps on an enemy and kills them.
         if (other.gameObject.CompareTag("StompArea"))
         {
             SoundManager.instance.PlaySound(jumpSound);
             ScoreScript.scoreValue += 10;
         }
+        //Player bounces off of an object
         if (other.gameObject.CompareTag("BounceArea"))
         {
             SoundManager.instance.PlaySound(jumpSound);
@@ -400,7 +405,8 @@ public class PlayerMovement : MonoBehaviour
             transform.SetPositionAndRotation(checkPointLocation.position + new Vector3(0.5175f, 0.5175f, 0f), transform.rotation);
         }
 
-
+        Physics2D.IgnoreLayerCollision(6,7, false);
+        Physics2D.IgnoreLayerCollision(7,8, false);
         animator.SetBool("isDead", false);
         animator.SetTrigger("Appear");
         SetCanMove(true);

@@ -48,7 +48,7 @@ public class GrondPatrol : MonoBehaviour
 
         if(contactCheck == true)
         {
-            SetEnemyPosition();
+                SetEnemyPosition();
         }
     }
 }

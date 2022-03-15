@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 32919308}
   - component: {fileID: 32919309}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,7 +555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 153171753}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: feet
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -16107,7 +16107,7 @@ GameObject:
   - component: {fileID: 560702623}
   - component: {fileID: 560702624}
   - component: {fileID: 560702625}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Boss
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -17134,7 +17134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1033117021}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: fire_point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17353,7 +17353,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1159342720}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: feet
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -17559,6 +17559,10 @@ PrefabInstance:
     - target: {fileID: 5487498351489642654, guid: d148a3fffcfc26d468b392ea3c6ecbd1, type: 3}
       propertyPath: m_Name
       value: Bullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5487498351489642654, guid: d148a3fffcfc26d468b392ea3c6ecbd1, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5487498351489642654, guid: d148a3fffcfc26d468b392ea3c6ecbd1, type: 3}
       propertyPath: m_IsActive
@@ -17816,7 +17820,7 @@ GameObject:
   - component: {fileID: 1289343122}
   - component: {fileID: 1289343121}
   - component: {fileID: 1289343124}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18266,7 +18270,7 @@ GameObject:
   - component: {fileID: 1552151076}
   - component: {fileID: 1552151075}
   - component: {fileID: 1552151074}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18393,7 +18397,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1663316628}
   - component: {fileID: 1663316629}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Head 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18454,7 +18458,7 @@ GameObject:
   - component: {fileID: 1697799691}
   - component: {fileID: 1697799692}
   - component: {fileID: 1697799693}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18945,7 +18949,7 @@ GameObject:
   - component: {fileID: 1979321471}
   - component: {fileID: 1979321475}
   - component: {fileID: 1979321476}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18978,7 +18982,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d17001ddd810ab4ab29943f0c5cd5cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 16
   rb: {fileID: 1979321473}
   player: {fileID: 2009552060}
   bulletSprite: {fileID: 1979321474}
@@ -19330,7 +19333,7 @@ GameObject:
   - component: {fileID: 2009552054}
   - component: {fileID: 2009552055}
   - component: {fileID: 2009552061}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -19352,6 +19355,9 @@ MonoBehaviour:
   startingHealth: 3
   hurtSound: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
   deathSound: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
+  iFramesDuration: 1.5
+  numFlashes: 3
+  currentHealth: 0
 --- !u!95 &2009552055
 Animator:
   serializedVersion: 3
@@ -19538,7 +19544,7 @@ GameObject:
   - component: {fileID: 2010003329}
   - component: {fileID: 2010003331}
   - component: {fileID: 2010003330}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Boss Cam
   m_TagString: Untagged
   m_Icon: {fileID: 0}

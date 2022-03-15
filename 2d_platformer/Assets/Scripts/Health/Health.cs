@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Health : MonoBehaviour
 {
@@ -7,6 +8,10 @@ public class Health : MonoBehaviour
     [SerializeField] private float startingHealth;
     [SerializeField] private AudioClip hurtSound;
     [SerializeField] private AudioClip deathSound;
+    
+    [SerializeField] private float iFramesDuration;
+    [SerializeField] private int numFlashes;
+    private SpriteRenderer spriteRend;
 
     //holds the player's current health. get set/being public is there so it can only curently be grabbed from Healthbar.cs
     public float currentHealth;
@@ -14,6 +19,7 @@ public class Health : MonoBehaviour
     {
         //Sets the player health to the max health
         initializeStartingHealth();
+        spriteRend = GetComponent<SpriteRenderer>();
     }
 
     public float getStartingHealth() 
@@ -39,6 +45,7 @@ public class Health : MonoBehaviour
         {
             SoundManager.instance.PlaySound(hurtSound);
             //damage taken, but player is still alive
+            StartCoroutine(Invulnerability());
         }
         else
         {
@@ -58,6 +65,21 @@ public class Health : MonoBehaviour
     public void IncreaseHealth()
     {
         hHelper.IncreaseHealth(ref currentHealth, startingHealth);
+    }
+
+    private IEnumerator Invulnerability()
+    {
+        Physics2D.IgnoreLayerCollision(6,7, true);
+        Physics2D.IgnoreLayerCollision(7,8, true);
+        for (int i = 0; i < numFlashes; i++)
+        {
+            spriteRend.color = new Color(1,0,0,0.5f);
+            yield return new WaitForSeconds(iFramesDuration / (numFlashes * 2));
+            spriteRend.color = Color.white;
+            yield return new WaitForSeconds(iFramesDuration / (numFlashes * 2));
+        }
+        Physics2D.IgnoreLayerCollision(6,7, false);
+        Physics2D.IgnoreLayerCollision(7,8, false);
     }
 
     // Update is called once per frame
