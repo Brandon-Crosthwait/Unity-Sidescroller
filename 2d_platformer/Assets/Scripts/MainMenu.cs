@@ -21,6 +21,7 @@ public class MainMenu : MonoBehaviour
 
     public void SetName()
     {
+        /*
         Player newPlayer = new Player();
         newPlayer.name = iField.text;
         newPlayer.score = 0;
@@ -35,6 +36,7 @@ public class MainMenu : MonoBehaviour
 
         writer.Serialize(file, newPlayer);
         file.Close();
+        */
 
         PlayerPrefs.SetString("Name", iField.text);
 
