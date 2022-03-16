@@ -15599,7 +15599,10 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Game Over
 
-    Press ''R'' to return to main menu'
+    Press ''R'' to respawn
+
+    Press ''M'' to return to main
+    menu'
 --- !u!222 &273204446
 CanvasRenderer:
   m_ObjectHideFlags: 0
