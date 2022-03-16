@@ -189,7 +189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3025931147532090148
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3095,7 +3095,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3046745458646401073
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3156,12 +3156,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Game Over
-
-    Press ''R'' to respawn
-
-    Press ''M'' to return to main
-    menu'
+  m_Text: "Bonus Score: 83\nTotal Score: 83\n Press 'M' to return to menu"
 --- !u!1 &7919696794575248042
 GameObject:
   m_ObjectHideFlags: 0
