@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Bossman_run : MonoBehaviour
 {
@@ -35,6 +36,11 @@ public class Bossman_run : MonoBehaviour
         boss = gameObject.GetComponent<Boss>();
         animator = rb.GetComponent<Animator>();
         pm = player.GetComponent<PlayerMovement>();
+
+        if(SceneManager.GetActiveScene().name == "BossFight 2")  //check so the boss isn't stuck in the rolling animation in later levels
+        {
+            animator.SetTrigger("Boss_Has_Fallen");
+        }
 
         //mainCamera.enabled = true;
         //bossCamera.enabled = false;
