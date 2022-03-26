@@ -1,0 +1,1 @@
+{"name":"jsonfroggo","score":0.0,"health":3.0,"level":1,"timer":0.0,"checkpoint":false}

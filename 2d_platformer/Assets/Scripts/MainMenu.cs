@@ -5,11 +5,13 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System;
+using System.IO;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private TMP_Text volumeTextValue = null;
     [SerializeField] private Slider volumeSlider = null;
+    SaveLoad saveload = new SaveLoad();
     public InputField iField;
 
     //private float masterVolume = 0;
@@ -21,26 +23,9 @@ public class MainMenu : MonoBehaviour
 
     public void SetName()
     {
-        /*
-        Player newPlayer = new Player();
-        newPlayer.name = iField.text;
-        newPlayer.score = 0;
-        newPlayer.health = 3;
-        newPlayer.level = 1;
-        newPlayer.checkpoint = false;
-
-        System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(Player));
-
-        var path = Application.dataPath + "//Scripts//Players//" + iField.text + ".xml";
-        System.IO.FileStream file = System.IO.File.Create(path);
-
-        writer.Serialize(file, newPlayer);
-        file.Close();
-        */
-
         PlayerPrefs.SetString("Name", iField.text);
-
         PlayerPrefs.SetString("PreviousLevel", "");
+        saveload.CreatePlayer(iField.text);
         SceneManager.LoadScene(Build.sceneOrder.LevelSelect.ToString());
     }
 

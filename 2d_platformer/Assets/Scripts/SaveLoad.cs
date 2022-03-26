@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class SaveLoad : MonoBehaviour
+public class SaveLoad
 {
     private Player player;
     private Health health;
@@ -12,20 +12,16 @@ public class SaveLoad : MonoBehaviour
     private Timer timer;
     private string path = "";
     private string persistentPath = "";
-    // Start is called before the first frame update
-    void Start()
-    {  
-        CreatePlayer();
-        SetPaths();        
-    }
 
-    private void CreatePlayer() {
+    public void CreatePlayer(string Name) {
         player = new Player();
         player.name = PlayerPrefs.GetString("Name");
-        player.score = ScoreScript.scoreValue;
-        player.health = health.currentHealth;
+        player.score = 0;
+        player.health = 3;
         player.level = 1;
-        player.timer = Timer.FlowingTime;
+        player.checkpoint = false;
+        player.timer = 0;
+        SaveData();
     }
 
     public void SetPaths() {
@@ -33,22 +29,11 @@ public class SaveLoad : MonoBehaviour
         persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar + PlayerPrefs.GetString("Name") + ".json";
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            SaveData();
-        }
-    }
-
     public void SaveData() {
-        string savePath = path;
-        Debug.Log("Saving data at: " + savePath);
+        var path = Application.persistentDataPath + "//" + player.name + ".txt";
         string json = JsonUtility.ToJson(player);
         Debug.Log(json);
 
-        using StreamWriter writer = new StreamWriter(savePath);
-        writer.Write(json);
+        File.WriteAllText(path, json);
     }
 }
