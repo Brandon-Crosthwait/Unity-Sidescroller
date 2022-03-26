@@ -15,6 +15,18 @@ public class SaveLoad
 
     public void CreatePlayer(string Name) {
         player = new Player();
+        player.name = Name;
+        player.score = 0;
+        player.health = 3;
+        player.level = 1;
+        player.checkpoint = false;
+        player.timer = 0;
+        SaveData();
+    }
+
+    public void SavePlayer(int level, bool checkpoint) {
+        //needs to be edited to take playerprefs of score health and timer into account
+        player = new Player();
         player.name = PlayerPrefs.GetString("Name");
         player.score = 0;
         player.health = 3;
@@ -32,8 +44,14 @@ public class SaveLoad
     public void SaveData() {
         var path = Application.persistentDataPath + "//" + player.name + ".txt";
         string json = JsonUtility.ToJson(player);
-        Debug.Log(json);
 
         File.WriteAllText(path, json);
+    }
+
+    public void LoadData(string Name) {
+        var path = Application.persistentDataPath + "//" + Name + ".txt";
+        string json = File.ReadAllText(path);
+        player = JsonUtility.FromJson<Player>(json);
+        Debug.Log(player);
     }
 }
