@@ -22,6 +22,8 @@ TagManager:
   - BounceArea
   - TurtleEnemy
   - Platform
+  - Boss
+  - EndBattle
   layers:
   - Default
   - TransparentFX

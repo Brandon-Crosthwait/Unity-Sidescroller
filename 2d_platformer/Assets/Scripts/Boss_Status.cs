@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Boss_Status : MonoBehaviour
 {
@@ -36,8 +37,10 @@ public class Boss_Status : MonoBehaviour
     public void DepleteHealth()
     {
         health--;
-        
-        if (health <= 0 && isDefeated == false)
+        Scene m_scene;
+        m_scene = SceneManager.GetActiveScene();
+        /*
+        if (m_scene.name == "BossFight 2")
         {
             animator.SetTrigger("isDefeated");
             br.canMove = false;
@@ -47,5 +50,18 @@ public class Boss_Status : MonoBehaviour
             isDefeated = true;
             //Destroy(gameObject);  //delete the boss
         }
+        */
+
+         if (health <= 0 && isDefeated == false && m_scene.name != "BossFight 2")
+        {
+            animator.SetTrigger("isDefeated");
+            br.canMove = false;
+            animationTimer.Start();
+            ScoreScript.scoreValue = +50;
+            bossDeathSound.Play();
+            isDefeated = true;
+            //Destroy(gameObject);  //delete the boss
+        }
+        
     }
 }

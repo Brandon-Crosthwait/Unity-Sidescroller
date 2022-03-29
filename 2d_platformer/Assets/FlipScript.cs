@@ -36,6 +36,9 @@ public class FlipScript : MonoBehaviour
             renderer.flipX = true;
             //transform.localScale = new Vector3(17f, 17f, 1f);  //change localScale to have him face Lect
         }
+
+        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -68,6 +71,11 @@ public class FlipScript : MonoBehaviour
             
             
             
+        }
+
+        if (collision.tag == "EndBattle")   //trigger at top floor of bossbattle2 to stop the enemies from flying at the end
+        {
+            aiPath.maxSpeed = 0;
         }
     }
 }

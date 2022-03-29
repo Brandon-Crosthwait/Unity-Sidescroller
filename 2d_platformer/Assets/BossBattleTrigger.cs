@@ -27,6 +27,9 @@ public class BossBattleTrigger : MonoBehaviour
 
     public bool hasBeenEnabled = false;
 
+    public GameObject sign;
+    public PlayerMovement player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +76,7 @@ public class BossBattleTrigger : MonoBehaviour
             path1.canMove = true;
             path2.canMove = true;
             myTimer.Stop();
+            player.canMove = true;
         }
 
     }
@@ -86,7 +90,8 @@ public class BossBattleTrigger : MonoBehaviour
             boss.enabled = true;  //enable the view to see the boss cam
             main.enabled = false;  //disable main camera for small scene
             myTimer.Start();  //start the timer that makes the boss wait in the scene for a moment before attacking
-
+            sign.SetActive(true);
+            player.canMove = false;
             
         }   
             //Vector3 gravity = new Vector3(1, 1, 1);     //turn on the gravity in the AIPath script
