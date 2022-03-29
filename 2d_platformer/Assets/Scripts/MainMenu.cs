@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         PlayerPrefs.SetString("PreviousLevel", "");
-        SceneManager.LoadScene(Build.sceneOrder.Credentials.ToString()); //Assuming Level Select stays at build index 3
+        SceneManager.LoadScene(Build.sceneOrder.Credentials.ToString());
     }
 
     public void SetName()

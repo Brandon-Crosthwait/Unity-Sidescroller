@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
 
     //Pause Menu Object
     public GameObject pauseMenuUI;
+    public GameObject settingsMenuUI;
     public static bool gameIsPaused = false;
 
     private HighScores instance;
@@ -104,10 +105,15 @@ public class UIManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1;
-        gameIsPaused = false;
-        PlayerMovement.isPaused = false;
+        if (settingsMenuUI.activeSelf) ;
+        else
+        {
+            pauseMenuUI.SetActive(false);
+            Time.timeScale = 1;
+            gameIsPaused = false;
+            PlayerMovement.isPaused = false;
+        }
+        
     }
 
     public void PauseGame()
