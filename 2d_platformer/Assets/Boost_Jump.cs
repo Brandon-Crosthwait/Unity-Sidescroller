@@ -17,7 +17,8 @@ public class Boost_Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        pm.movementSpeed = 12f;
+        pm.jumpForce = 1200f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
