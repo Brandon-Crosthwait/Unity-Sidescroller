@@ -6,15 +6,23 @@ using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //holds which character is selected
+    private int characterSelected = 0;
     //movementSpeed holds the value for the speed of the player's movement
     public float movementSpeed;
+    // Holds value for jump force
     public float jumpForce;
+    //Gravity scale is initialized
     private float gravityScale = 5.0f;
     public Transform feet;
+    //Holds startup Location
     public Transform startLocation;
+    //Holds checkPoint Location
     public Transform checkPointLocation;
     public LayerMask groundLayer;
+    //Monitors "r" for respawn when dead
     private bool rToRespawn = false;
+    //Gets set to true when checkpoint is unlocked.
     private bool checkPointUnlocked = false;
 
     //[SerializeField] private UnityEvent onContactTrigger;
@@ -74,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
     bool slowMovement = false;
 
     private void Start() {
+            characterSelected = PlayerPrefs.GetInt("CharacterAnimatorOverriderID");
             animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
 
@@ -89,7 +98,19 @@ public class PlayerMovement : MonoBehaviour
             slowMovementTime = 0.0f;
             slowMovementTimer = Time.time;
 
-            Respawn();
+            //initializes movement speed if speed character is selected (scuba)
+            if (characterSelected == 1)
+            {
+                movementSpeed = 11f;
+            }
+            //initalizes jumpforce if jump character is selected (Phatphin)
+            if (characterSelected == 2)
+            {
+                jumpForce = 1050;
+            }
+
+
+        Respawn();
     }
 
     // Runs every frame
@@ -158,7 +179,15 @@ public class PlayerMovement : MonoBehaviour
         {
             powerUpTimer = 0;
             powerUp = false;
-            movementSpeed = 8;
+            //Resets back to speed upon character selection
+            if (characterSelected == 1)
+            {
+                movementSpeed = 11f;
+            }
+            else
+            {
+                movementSpeed = 8;
+            }
         }
         
         //Timer Countdown for Turtle Enemy.
@@ -170,7 +199,15 @@ public class PlayerMovement : MonoBehaviour
         {
             slowMovementTimer = 0;
             slowMovement = false;
-            movementSpeed = 8;
+            //Resets speed upon character selection
+            if (characterSelected == 1)
+            {
+                movementSpeed = 11f;
+            }
+            else
+            {
+                movementSpeed = 8;
+            }
         }
 
         timer += Time.deltaTime;
@@ -189,10 +226,20 @@ public class PlayerMovement : MonoBehaviour
                 //determines the push back when a player is trying to wall jump
                 if ((movementX < -0.01f) && (isWallSliding) && (Input.GetButtonDown("Jump"))) //facing left
                 {
+                    //does not allow high wall jumps for high jump character
+                    if (characterSelected == 2)
+                    {
+                        jumpForce = 850;
+                    }
                     currentwallJumpVelocity = initialwallJumpVelocity;
                 }
                 else if ((movementX > 0.01f) && (isWallSliding) && (Input.GetButtonDown("Jump"))) //facing right
                 {
+                    //does not allow high wall jumps for high jump character
+                    if (characterSelected == 2)
+                    {
+                        jumpForce = 850;
+                    }
                     currentwallJumpVelocity = -initialwallJumpVelocity;
                 }
 
@@ -203,6 +250,11 @@ public class PlayerMovement : MonoBehaviour
                     doubleJumpActive = false;
                 }
                 
+            }
+            //changes high jump power back to high if character is selected and not wall sliding
+            if ((!isWallSliding) && (characterSelected == 2))
+            {
+                jumpForce = 1050;
             }
         }
         
