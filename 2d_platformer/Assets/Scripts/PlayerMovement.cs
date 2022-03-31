@@ -106,7 +106,8 @@ public class PlayerMovement : MonoBehaviour
             //initalizes jumpforce if jump character is selected (Phatphin)
             if (characterSelected == 2)
             {
-                jumpForce = 1050;
+                initialwallJumpVelocity = 24;
+                //jumpForce = 1050;
             }
 
 
