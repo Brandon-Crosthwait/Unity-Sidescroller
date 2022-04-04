@@ -50,4 +50,15 @@ public class MovingPlatform : MonoBehaviour
         //Move in direction
         platform.position = new Vector3(platform.position.x + Time.deltaTime * _direction * speed, platform.position.y, platform.position.z);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        collision.transform.SetParent(transform);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        collision.transform.SetParent(null);
+    }
+
 }
