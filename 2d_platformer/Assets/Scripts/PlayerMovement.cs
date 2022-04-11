@@ -475,6 +475,7 @@ public class PlayerMovement : MonoBehaviour
     public void SetCheckpointActive()
     {
         checkPointUnlocked = true;
+        PlayerPrefs.SetString("Checkpoint", true.ToString());
     }
 
     public void SetCanMove(bool canMove)

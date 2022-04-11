@@ -99,20 +99,24 @@ public class HealthHelper
     public void initializeStartingHealth(ref float health, float startingHealth)
     {
         health = startingHealth;
+        PlayerPrefs.SetString("Health", health.ToString());
     }
 
     public void IncreaseHealth(ref float health, float maxHealth)
     {
         health = Mathf.Clamp(health + 1, 0, maxHealth);
+        PlayerPrefs.SetString("Health", health.ToString());
     }
 
     public void IncreaseHealth(ref float health, float amount, float maxHealth)
     {
         health = Mathf.Clamp(health + amount, 0, maxHealth);
+        PlayerPrefs.SetString("Health", health.ToString());
     }
 
     public void takeDamage(ref float health, float damage, float maxHealth)
     {
         health = Mathf.Clamp(health - damage, 0, maxHealth);
+        PlayerPrefs.SetString("Health", health.ToString());
     }
 }

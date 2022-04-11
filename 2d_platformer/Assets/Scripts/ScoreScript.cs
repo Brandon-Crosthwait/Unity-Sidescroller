@@ -19,6 +19,7 @@ public class ScoreScript : MonoBehaviour
     void Update()
     {
         score.text = "Score: " + scoreValue;
+        PlayerPrefs.SetString("Score", scoreValue.ToString());
         /*if (Input.GetKeyDown(KeyCode.F))
             scoreValue += 10;*/
     }

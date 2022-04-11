@@ -10,6 +10,7 @@ public class Player
     public float score;
     public float health;
     public int level;
-    public float timer;
+    public float minutes;
+    public float seconds;
     public bool checkpoint;
 }

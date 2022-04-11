@@ -37,6 +37,9 @@ public class Timer : MonoBehaviour
         float minutes = Mathf.FloorToInt(currentTime / 60);
         float seconds = Mathf.FloorToInt(currentTime % 60);
 
+        PlayerPrefs.SetString("Minutes", minutes.ToString());
+        PlayerPrefs.SetString("Seconds", seconds.ToString());
+
         //{0} and {1} are used as the parameters inserted into Format() for minutes and seconds
         //and displayed in sets of two numbers
         TimerTxt.text = string.Format("{0:00}:{1:00}", minutes, seconds);
