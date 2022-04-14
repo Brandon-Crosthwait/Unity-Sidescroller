@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Health : MonoBehaviour
 {
+    private int characterSelected;
     private HealthHelper hHelper = new HealthHelper();
     //SerializedFiled allows to be seen in the editor
     [SerializeField] private float startingHealth;
@@ -17,6 +18,12 @@ public class Health : MonoBehaviour
     public float currentHealth;
     private void Awake()
     {
+        //health Character
+        characterSelected = PlayerPrefs.GetInt("CharacterAnimatorOverriderID");
+        if(characterSelected == 3)
+        {
+            startingHealth = 4;
+        }
         //Sets the player health to the max health
         initializeStartingHealth();
         spriteRend = GetComponent<SpriteRenderer>();

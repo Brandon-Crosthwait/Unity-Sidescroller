@@ -383,8 +383,15 @@ public class PlayerMovement : MonoBehaviour
             Destroy(other.gameObject);
             ScoreScript.scoreValue += 10;
         }
-        //Adding to health if HealthCollectable is picked up
-        if (other.gameObject.CompareTag("HealthCollectable") && health.currentHealth < 3)
+        //Adding to health if HealthCollectable is picked up when health character is not selected
+        if (other.gameObject.CompareTag("HealthCollectable") && health.currentHealth < 3 && characterSelected != 3)
+        {
+            SoundManager.instance.PlaySound(collectSound);
+            Destroy(other.gameObject);
+            health.IncreaseHealth(1);
+        }
+        //Adding to health if HealthCollectable is picked up when health character is selected
+        if (other.gameObject.CompareTag("HealthCollectable") && health.currentHealth < 4 && characterSelected == 3)
         {
             SoundManager.instance.PlaySound(collectSound);
             Destroy(other.gameObject);
