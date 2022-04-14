@@ -12,5 +12,5 @@ public class Player
     public int level;
     public float minutes;
     public float seconds;
-    public bool checkpoint;
+    public string checkpoint;
 }

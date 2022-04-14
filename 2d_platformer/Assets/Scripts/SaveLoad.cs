@@ -21,23 +21,24 @@ public class SaveLoad
         player.score = 0;
         player.health = 3;
         player.level = 1;
-        player.checkpoint = false;
+        player.checkpoint = "false";
         player.minutes = 0.0f;
         player.seconds = 0.0f;
         SaveData();
     }
 
-    public void SavePlayer(int level, bool checkpoint) {
+    public void SavePlayer() {
         //needs to be edited to take playerprefs of score health and timer into account
         player = new Player();
         player.name = PlayerPrefs.GetString("Name");
         player.score = float.Parse(PlayerPrefs.GetString("Score"));
         player.health = float.Parse(PlayerPrefs.GetString("Health"));
         player.level = 1;
-        player.checkpoint = Convert.ToBoolean(PlayerPrefs.GetString("Checkpoint"));
+        player.checkpoint = PlayerPrefs.GetString("Checkpoint");
         player.minutes = float.Parse(PlayerPrefs.GetString("Minutes"));
         player.seconds = float.Parse(PlayerPrefs.GetString("Seconds"));
         SaveData();
+        Debug.Log("Player Saved");
     }
 
     public void SetPaths() {
