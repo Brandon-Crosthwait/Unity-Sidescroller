@@ -6,6 +6,7 @@ public class EnvironmentDamage : MonoBehaviour
 {
     [SerializeField] private float damage;
     [SerializeField] private Health playerHealth;
+    private int characterSelected;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
