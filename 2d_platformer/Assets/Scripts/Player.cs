@@ -7,7 +7,7 @@ public class Player
 {
     private static int id;
     public string name;
-    public float score;
+    public int score;
     public float health;
     public int level;
     public float minutes;

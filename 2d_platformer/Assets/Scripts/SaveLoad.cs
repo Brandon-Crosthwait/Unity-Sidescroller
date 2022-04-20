@@ -11,7 +11,6 @@ public class SaveLoad
 {
     private Player player;
     private Health health;
-    private ScoreScript scoreScript;
     private PlayerMovement playerMovement;
     private Timer timer;
     private string path = "";
@@ -34,7 +33,7 @@ public class SaveLoad
         //needs to be edited to take playerprefs of score health and timer into account
         player = new Player();
         player.name = PlayerPrefs.GetString("Name");
-        player.score = float.Parse(PlayerPrefs.GetString("Score"));
+        player.score = int.Parse(PlayerPrefs.GetString("Score"));
         player.health = float.Parse(PlayerPrefs.GetString("Health"));
         player.level = 1;
         player.checkpoint = PlayerPrefs.GetString("Checkpoint");
@@ -66,6 +65,7 @@ public class SaveLoad
         PlayerPrefs.SetString("Checkpoint", player.checkpoint);
         PlayerPrefs.SetString("Minutes", player.minutes.ToString());
         PlayerPrefs.SetString("Seconds", player.seconds.ToString());
+        ScoreScript.scoreValue = player.score;
 
         SceneManager.LoadScene(Build.sceneOrder.LevelSelect.ToString());
         Debug.Log(player);
