@@ -24,6 +24,7 @@ TagManager:
   - Platform
   - Boss
   - EndBattle
+  - Projectile
   layers:
   - Default
   - TransparentFX
