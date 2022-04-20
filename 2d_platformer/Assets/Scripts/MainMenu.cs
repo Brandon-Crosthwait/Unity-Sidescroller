@@ -51,7 +51,14 @@ public class MainMenu : MonoBehaviour
                 string noExtension = Path.GetFileNameWithoutExtension(file.Name);
                 copy.GetComponentInChildren<Text>().text = noExtension;
 
-                // copy.GetComponent<Button>().onClick.AddListener();
+                copy.GetComponent<Button>().onClick.AddListener(
+
+                    () => 
+                    {
+                        saveload.LoadData(noExtension);
+                    }
+                        
+                );
             }
             loaded = true;
         }        

@@ -4,6 +4,8 @@ using UnityEngine;
 using System.IO;
 using System;
 using System.Globalization;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SaveLoad
 {
@@ -58,6 +60,7 @@ public class SaveLoad
         var path = Application.persistentDataPath + "//" + Name + ".txt";
         string json = File.ReadAllText(path);
         player = JsonUtility.FromJson<Player>(json);
+        SceneManager.LoadScene(Build.sceneOrder.LevelSelect.ToString());
         Debug.Log(player);
     }
 
