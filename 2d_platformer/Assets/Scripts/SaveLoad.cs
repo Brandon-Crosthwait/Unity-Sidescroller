@@ -14,6 +14,7 @@ public class SaveLoad
     private Timer timer;
     private string path = "";
     private string persistentPath = "";
+    
 
     public void CreatePlayer(string Name) {
         player = new Player();
@@ -59,4 +60,5 @@ public class SaveLoad
         player = JsonUtility.FromJson<Player>(json);
         Debug.Log(player);
     }
+
 }
