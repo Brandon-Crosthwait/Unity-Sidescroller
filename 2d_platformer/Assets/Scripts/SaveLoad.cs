@@ -60,6 +60,13 @@ public class SaveLoad
         var path = Application.persistentDataPath + "//" + Name + ".txt";
         string json = File.ReadAllText(path);
         player = JsonUtility.FromJson<Player>(json);
+        PlayerPrefs.SetString("Name", player.name.ToString());
+        PlayerPrefs.SetString("Score", player.score.ToString());
+        PlayerPrefs.SetString("Health", player.health.ToString());
+        PlayerPrefs.SetString("Checkpoint", player.checkpoint);
+        PlayerPrefs.SetString("Minutes", player.minutes.ToString());
+        PlayerPrefs.SetString("Seconds", player.seconds.ToString());
+
         SceneManager.LoadScene(Build.sceneOrder.LevelSelect.ToString());
         Debug.Log(player);
     }
