@@ -433,8 +433,16 @@ public class PlayerMovement : MonoBehaviour
         {
             SoundManager.instance.PlaySound(collectSound);
             checkPointUnlocked = true;
-
         }
+
+        if (other.gameObject.CompareTag("Projectile"))
+        {
+            GetHit();
+                movementSpeed = 4;
+                slowMovement = true;
+                slowMovementTime = 5.0f;
+        }
+
         //Might not need to be used
         if (other.gameObject.CompareTag("LevelEnd"))
         {
