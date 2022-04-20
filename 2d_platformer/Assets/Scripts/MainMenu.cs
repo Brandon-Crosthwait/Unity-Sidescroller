@@ -14,6 +14,14 @@ public class MainMenu : MonoBehaviour
     SaveLoad saveload = new SaveLoad();
     public InputField iField;
 
+    [SerializeField]
+    public GameObject itemTemplate;
+
+    [SerializeField]
+    public GameObject content;
+
+    public bool loaded = false;
+
     //private float masterVolume = 0;
     public void PlayGame()
     {
@@ -31,7 +39,22 @@ public class MainMenu : MonoBehaviour
 
     public void LoadGame()
     {
-        Debug.Log("LOADED GAME");
+        if (loaded == false)
+        {
+            DirectoryInfo di = new DirectoryInfo(@Application.persistentDataPath + Path.AltDirectorySeparatorChar);
+            FileInfo[] files = di.GetFiles("*.txt");
+            string str = "";
+            foreach (FileInfo file in files)
+            {
+                var copy = Instantiate(itemTemplate);
+                copy.transform.SetParent(content.transform, false);
+                string noExtension = Path.GetFileNameWithoutExtension(file.Name);
+                copy.GetComponentInChildren<Text>().text = noExtension;
+
+                // copy.GetComponent<Button>().onClick.AddListener();
+            }
+            loaded = true;
+        }        
     }
 
     public void saveGame()
@@ -42,6 +65,7 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("QUIT!");
+        resetLoaded();
         Application.Quit();
     }
 
@@ -61,5 +85,9 @@ public class MainMenu : MonoBehaviour
         //masterVolume = PlayerPrefs.GetFloat("masterVolume");
         volumeTextValue.text = PlayerPrefs.GetFloat("masterVolume").ToString("F1");
         volumeSlider.value = PlayerPrefs.GetFloat("masterVolume");
+    }
+
+    public void resetLoaded() {
+        loaded = false;
     }
 }
