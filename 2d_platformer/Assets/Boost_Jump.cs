@@ -7,6 +7,7 @@ public class Boost_Jump : MonoBehaviour
     [SerializeField] Rigidbody2D player;
     [SerializeField] int force;
     [SerializeField] PlayerMovement pm;
+    [SerializeField] AudioSource boostJump;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,7 @@ public class Boost_Jump : MonoBehaviour
         if (collision.tag == "Player")
         {
             player.AddForce(Vector2.up * force);
+            boostJump.Play();
         }
     }
 }

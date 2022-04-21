@@ -52,6 +52,8 @@ public class FlipScript : MonoBehaviour
 
             if (health.currentHealth <= 0)  //check if the player has died
             {
+              //PlayerMovement pm = collision.GetComponent<PlayerMovement>();
+                //pm.canMove = false;
                 aiPath.canMove = false;    //if player has died AI stops moving
                 //stopAnimation = true;
             }
