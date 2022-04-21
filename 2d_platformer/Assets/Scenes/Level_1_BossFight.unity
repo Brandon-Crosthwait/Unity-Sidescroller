@@ -15605,6 +15605,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b400790695172d42b3d8e1b09bd6f8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &477504034 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1199621684237731895, guid: 2d06bb8c875786748bbc69cf58294ddb, type: 3}
+  m_PrefabInstance: {fileID: 1634649715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477504029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf95ec38983cae49a6d177911e2ac6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &477504035 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 1199621684237731894, guid: 2d06bb8c875786748bbc69cf58294ddb, type: 3}
@@ -15759,7 +15770,7 @@ MonoBehaviour:
   player: {fileID: 477504038}
   rb: {fileID: 560702617}
   bossGO: {fileID: 560702613}
-  pm: {fileID: 0}
+  pm: {fileID: 477504034}
   animator: {fileID: 0}
   playerRB: {fileID: 477504035}
   canMove: 1
@@ -15926,7 +15937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab23b167dbd0da44f8f7e96040a65ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2009552060}
+  player: {fileID: 477504038}
   bossman: {fileID: 560702613}
   isFlipped: 0
 --- !u!58 &560702622
@@ -17772,7 +17783,7 @@ MonoBehaviour:
   bossCam: {fileID: 2010003331}
   firstTrigger: {fileID: 1989258433}
   eb: {fileID: 0}
-  player: {fileID: 2009552053}
+  player: {fileID: 477504029}
   pm: {fileID: 0}
   fallSound: {fileID: 1882996142}
   Boss: {fileID: 560702617}
@@ -18247,7 +18258,7 @@ MonoBehaviour:
   bossCam: {fileID: 2010003331}
   boss: {fileID: 560702613}
   trigger: {fileID: 1989258433}
-  player: {fileID: 2009552053}
+  player: {fileID: 477504029}
 --- !u!61 &1989258436
 BoxCollider2D:
   m_ObjectHideFlags: 0
