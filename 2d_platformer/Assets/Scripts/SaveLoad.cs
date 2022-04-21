@@ -57,6 +57,7 @@ public class SaveLoad
 
     public void LoadData(string Name) {
         var path = Application.persistentDataPath + "//" + Name + ".txt";
+        
         string json = File.ReadAllText(path);
         player = JsonUtility.FromJson<Player>(json);
         PlayerPrefs.SetString("Name", player.name.ToString());
@@ -69,6 +70,7 @@ public class SaveLoad
 
         SceneManager.LoadScene(Build.sceneOrder.LevelSelect.ToString());
         Debug.Log(player);
+        Debug.Log(path);
     }
 
 }

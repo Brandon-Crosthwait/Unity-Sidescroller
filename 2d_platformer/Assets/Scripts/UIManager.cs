@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    SaveLoad saveload = new SaveLoad();
     //lifeLeft is for the Health class where the currentHealth is stored
     [SerializeField] private Health lifeLeft;
     //Used for the game over text
@@ -97,7 +98,9 @@ public class UIManager : MonoBehaviour
     {
         name = PlayerPrefs.GetString("Name");
         PlayerPrefs.SetString("highscore", name + ": " + ScoreScript.scoreValue);
+        PlayerPrefs.SetString("Score", ScoreScript.scoreValue.ToString());
 
+        saveload.SavePlayer();
         _gameOverText.gameObject.SetActive(true);
         _vig.gameObject.SetActive(true);
         gameOver = true;
@@ -128,20 +131,22 @@ public class UIManager : MonoBehaviour
     public void PlayerWin()
     {
         //Takes the score value of the player
-        float endScore = ScoreScript.scoreValue;
-        float bonusScore = 0;
+        int endScore = ScoreScript.scoreValue;
+        int bonusScore = 0;
         if (Timer.FlowingTime > _gameTime) {
             //No bonus score
         }
         else {
             //bonus score compares the bonus score time minus the player's time plus 25%
-            bonusScore = ((_gameTime - Timer.FlowingTime) * 1.25f);
+            bonusScore = (int)((_gameTime - Timer.FlowingTime) * 1.25f);
         }
         endScore = endScore + bonusScore;
         //instance.AddNewScore("frog", (int)endScore);
         name = PlayerPrefs.GetString("Name");
+        PlayerPrefs.SetString("Score", endScore.ToString());
         PlayerPrefs.SetString("highscore", name + ": " + endScore);
 
+        saveload.SavePlayer();
         _gameOverText.gameObject.SetActive(true);
         _gameOverText.text = "Bonus Score: " + Mathf.Round(bonusScore) + "\nTotal Score: " + Mathf.Round(endScore) + "\n Press 'M' to return to menu";
         _vig.gameObject.SetActive(true);

@@ -33,7 +33,7 @@ public class MainMenu : MonoBehaviour
     {
         PlayerPrefs.SetString("Name", iField.text);
         PlayerPrefs.SetString("PreviousLevel", "");
-        //saveload.CreatePlayer(iField.text);
+        saveload.CreatePlayer(iField.text);
         SceneManager.LoadScene(Build.sceneOrder.LevelSelect.ToString());
     }
 
