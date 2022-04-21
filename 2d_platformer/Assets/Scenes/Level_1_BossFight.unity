@@ -15605,6 +15605,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b400790695172d42b3d8e1b09bd6f8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &477504035 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 1199621684237731894, guid: 2d06bb8c875786748bbc69cf58294ddb, type: 3}
+  m_PrefabInstance: {fileID: 1634649715}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &477504038 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1199621684237731891, guid: 2d06bb8c875786748bbc69cf58294ddb, type: 3}
@@ -15751,12 +15756,12 @@ MonoBehaviour:
   speed: 4
   attackRange: 4
   hb: {fileID: 0}
-  player: {fileID: 2009552060}
+  player: {fileID: 477504038}
   rb: {fileID: 560702617}
   bossGO: {fileID: 560702613}
   pm: {fileID: 0}
   animator: {fileID: 0}
-  playerRB: {fileID: 2009552057}
+  playerRB: {fileID: 477504035}
   canMove: 1
   mainCamera: {fileID: 944195332}
   bossCamera: {fileID: 2010003331}
@@ -17458,6 +17463,10 @@ PrefabInstance:
     - target: {fileID: 1199621684237731898, guid: 2d06bb8c875786748bbc69cf58294ddb, type: 3}
       propertyPath: m_Name
       value: Player (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1199621684237731898, guid: 2d06bb8c875786748bbc69cf58294ddb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d06bb8c875786748bbc69cf58294ddb, type: 3}
