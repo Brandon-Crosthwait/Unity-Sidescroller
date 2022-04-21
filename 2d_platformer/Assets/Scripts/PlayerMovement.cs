@@ -81,6 +81,8 @@ public class PlayerMovement : MonoBehaviour
     private float slowMovementTimer;
     bool slowMovement = false;
 
+    private PlayerMovementHelper playerMovementHelper = new PlayerMovementHelper();
+
     private void Start() {
             characterSelected = PlayerPrefs.GetInt("CharacterAnimatorOverriderID");
             animator = GetComponent<Animator>();
@@ -475,34 +477,62 @@ public class PlayerMovement : MonoBehaviour
 
         Physics2D.IgnoreLayerCollision(6,7, false);
         Physics2D.IgnoreLayerCollision(7,8, false);
-        animator.SetBool("isDead", false);
-        animator.SetTrigger("Appear");
-        SetCanMove(true);
-        rb.gravityScale = gravityScale;
+        playerMovementHelper.Respawn(animator, rb, ref canMove, gravityScale);
         rToRespawn = false;
     }
 
     public void GetHit()
     {
-        animator.SetTrigger("isHit");
+        playerMovementHelper.GetHit(animator);
     }
 
     public void SetCheckpointActive()
     {
-        checkPointUnlocked = true;
+        playerMovementHelper.SetCheckpointActive(ref checkPointUnlocked);
         PlayerPrefs.SetString("Checkpoint", "true");
     }
 
     public void SetCanMove(bool canMove)
     {
-        this.canMove = canMove;
+        playerMovementHelper.SetCanMove(ref this.canMove, canMove);
     }
 
     public void PlayerDeath()
     {
-        SetCanMove(false);
+        playerMovementHelper.PlayerDeath(animator, rb, ref canMove);
+    }
+}
+
+public class PlayerMovementHelper
+{
+    public void GetHit(Animator animator)
+    {
+        animator.SetTrigger("isHit");
+    }
+
+    public void SetCheckpointActive(ref bool checkPointUnlocked)
+    {
+        checkPointUnlocked = true;
+    }
+
+    public void SetCanMove(ref bool currentMovement, bool newMovement)
+    {
+        currentMovement = newMovement;
+    }
+
+    public void PlayerDeath(Animator animator, Rigidbody2D rb, ref bool canMove)
+    {
+        SetCanMove(ref canMove, false);
         animator.SetBool("isDead", true);
         animator.SetBool("isJumping", false);
         rb.gravityScale = 0f;
+    }
+
+    public void Respawn(Animator animator, Rigidbody2D rb, ref bool canMove, float gravityScale)
+    {
+        animator.SetBool("isDead", false);
+        animator.SetTrigger("Appear");
+        SetCanMove(ref canMove, true);
+        rb.gravityScale = gravityScale;
     }
 }
