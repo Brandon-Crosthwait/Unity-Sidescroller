@@ -92,6 +92,7 @@ public class MainMenu : MonoBehaviour
         //masterVolume = PlayerPrefs.GetFloat("masterVolume");
         volumeTextValue.text = PlayerPrefs.GetFloat("masterVolume").ToString("F1");
         volumeSlider.value = PlayerPrefs.GetFloat("masterVolume");
+        SetVolume(PlayerPrefs.GetFloat("masterVolume"));
     }
 
     public void resetLoaded() {
