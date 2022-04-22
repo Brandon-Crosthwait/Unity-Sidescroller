@@ -126,6 +126,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Physics2D.IgnoreLayerCollision(7,8, true);
             rToRespawn = true;
+            Timer.TimerOn = false;
         }
 
         // Respawns player upon pressing r to the last checkpoint
