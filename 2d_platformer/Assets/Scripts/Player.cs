@@ -13,4 +13,5 @@ public class Player
     public float minutes;
     public float seconds;
     public string checkpoint;
+    public int characterAnimatorOverriderID;
 }

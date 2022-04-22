@@ -39,6 +39,7 @@ public class SaveLoad
         player.checkpoint = PlayerPrefs.GetString("Checkpoint");
         player.minutes = float.Parse(PlayerPrefs.GetString("Minutes"));
         player.seconds = float.Parse(PlayerPrefs.GetString("Seconds"));
+        player.characterAnimatorOverriderID = int.Parse(PlayerPrefs.GetString("CharacterAnimatorOverriderID"));
         SaveData();
         Debug.Log("Player Saved");
     }
@@ -66,6 +67,7 @@ public class SaveLoad
         PlayerPrefs.SetString("Checkpoint", player.checkpoint);
         PlayerPrefs.SetString("Minutes", player.minutes.ToString());
         PlayerPrefs.SetString("Seconds", player.seconds.ToString());
+        PlayerPrefs.SetString("CharacterAnimatorOverriderID", player.characterAnimatorOverriderID.ToString());
         ScoreScript.scoreValue = player.score;
 
         SceneManager.LoadScene(Build.sceneOrder.LevelSelect.ToString());
