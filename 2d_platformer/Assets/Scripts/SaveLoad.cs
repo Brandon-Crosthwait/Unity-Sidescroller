@@ -39,7 +39,7 @@ public class SaveLoad
         player.checkpoint = PlayerPrefs.GetString("Checkpoint");
         player.minutes = float.Parse(PlayerPrefs.GetString("Minutes"));
         player.seconds = float.Parse(PlayerPrefs.GetString("Seconds"));
-        player.characterAnimatorOverriderID = int.Parse(PlayerPrefs.GetString("CharacterAnimatorOverriderID"));
+        player.characterAnimatorOverriderID = PlayerPrefs.GetInt("CharacterAnimatorOverriderID");
         SaveData();
         Debug.Log("Player Saved");
     }
